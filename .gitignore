@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+.env.local
+.git_upstream_backup/
+backend/
+*.bat
+*.ps1
+FEATURES_AND_TECH_STACK_REVAMP.md
+scratch_commit.py
