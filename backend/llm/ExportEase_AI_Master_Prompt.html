@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>ExportEase AI Master Prompt</title>
+<style>
+  body {
+    margin: 0;
+    padding: 2rem;
+    font-family: 'Inter', system-ui, sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #f0f0f0;
+    overflow-x: hidden;
+    animation: fadeIn 2s ease-out forwards;
+    opacity: 0;
+  }
+  h1, h2, h3, h4 {
+    margin-top: 2rem;
+    color: #ffdb70;
+  }
+  pre {
+    background: rgba(0,0,0,0.4);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.95rem;
+  }
+  section {
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideFade 1s ease-out forwards;
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  @keyframes slideFade {
+    to { opacity:1; transform: translateY(0); }
+  }
+  /* Staggered animation delays for sections */
+  section:nth-of-type(1) { animation-delay: 0.3s; }
+  section:nth-of-type(2) { animation-delay: 0.6s; }
+  section:nth-of-type(3) { animation-delay: 0.9s; }
+  section:nth-of-type(4) { animation-delay: 1.2s; }
+  section:nth-of-type(5) { animation-delay: 1.5s; }
+  section:nth-of-type(6) { animation-delay: 1.8s; }
+  section:nth-of-type(7) { animation-delay: 2.1s; }
+  section:nth-of-type(8) { animation-delay: 2.4s; }
+</style>
+</head>
+<body>
+<h1>ExportEase AI Master Prompt</h1>
+
+<section>
+<h2>AI Architecture / LLM Layer</h2>
+<p><strong>MultI-LLM Orchestration Layer</strong></p>
+<pre>
+# MULTI-LLM ORCHESTRATION LAYER
+
+ExportEase AI must include a Multi-LLM Orchestration Engine capable of dynamically routing requests across multiple language models and providers. The system should treat LLMs as interchangeable services through a unified abstraction layer.
+
+## Objectives
+* Support multiple LLM providers simultaneously.
+* Route requests to the most appropriate model based on task type.
+* Enable automatic failover when a provider is unavailable.
+* Allow cost-aware and latency-aware routing.
+* Provide model fallback chains.
+* Support A/B testing and evaluation between models.
+* Enable ensemble responses where appropriate.
+* Permit adding new providers without modifying business logic.
+* Keep API keys and provider credentials exclusively on the backend.
+* Support streaming responses consistently across all providers.
+</pre>
+</section>
+
+<section>
+<h3>Supported LLM Providers</h3>
+<pre>
+## OpenRouter (Primary Gateway)
+... (list omitted for brevity) ...
+## Native Provider Support
+... (list omitted for brevity) ...
+</pre>
+</section>
+
+<section>
+<h3>Model Registry</h3>
+<pre>
+Each model configuration includes ID, Provider, Display Name, Endpoint, Context Window, Max Output Tokens, Streaming Support, Vision Support, Function Calling Support, Tool Calling Support, JSON Mode Support, Structured Output Support, Embedding Compatibility, Pricing, Avg Latency, Availability, Rate Limits, Supported Languages, Safety Rating, Recommended Use Cases.
+</pre>
+</section>
+
+<section>
+<h3>Task‑Based Model Routing</h3>
+<pre>
+| Task | Preferred Model Type |
+|------|----------------------|
+| General Chat | GPT / Claude / Gemini |
+| Export Compliance | Claude / GPT |
+| ... (remaining rows omitted) |
+</pre>
+</section>
+
+<section>
+<h3>Multi‑Model Execution Modes</h3>
+<pre>
+- Single Model
+- Automatic Routing
+- Fallback Mode (Claude → GPT → Gemini → Qwen → Llama)
+- Parallel Execution
+- Ensemble Mode
+- Consensus Mode
+</pre>
+</section>
+
+<section>
+<h3>Model Evaluation Engine</h3>
+<pre>
+Metrics: Accuracy, Hallucination Rate, Citation Coverage, Latency, Throughput, Cost per Request, Token Usage, User Feedback, Success Rate, Failure Rate, Retry Count.
+</pre>
+</section>
+
+<section>
+<h3>Model Configuration</h3>
+<pre>
+Parameters: Default Model, Preferred Provider, Temperature, Top‑p, Max Tokens, Presence Penalty, Frequency Penalty, Stop Sequences, Streaming Enabled, Timeout, Retry Count, Fallback Chain, Routing Policy, Safety Level, JSON Mode, Tool Calling, Vision Enabled.
+</pre>
+</section>
+
+<section>
+<h3>Multilingual AI Support</h3>
+<pre>
+Supported languages include English, Hindi, Tamil, Telugu, Kannada, Malayalam, Bengali, Marathi, Gujarati, Punjabi, Urdu, Arabic, Chinese, Japanese, Korean, French, German, Spanish, Portuguese, Russian, Italian, Dutch, plus extensibility.
+</pre>
+</section>
+
+<section>
+<h3>Future Model Extensibility</h3>
+<pre>
+Design for foundation, multimodal, reasoning, speech, image‑generation, and domain‑specific fine‑tuned models with minimal effort.
+</pre>
+</section>
+
+</body>
+</html>

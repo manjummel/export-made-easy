@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ExportEase AI Chatbot</title>
+<style>
+  :root {
+    --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --primary-color: #ffdb70;
+    --text-color: #f0f0f0;
+    --bot-msg-bg: rgba(48, 43, 99, 0.7);
+    --user-msg-bg: rgba(255, 219, 112, 0.2);
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .chat-container {
+    width: 90%;
+    max-width: 800px;
+    height: 85vh;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    animation: fadeIn 1s ease-out;
+  }
+
+  .chat-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .bot-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0f0c29;
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: 0 0 15px var(--primary-color);
+  }
+
+  .header-info h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+  }
+
+  .header-info p {
+    margin: 5px 0 0;
+    font-size: 0.85rem;
+    color: #aaa;
+  }
+
+  .chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    scroll-behavior: smooth;
+  }
+
+  .chat-messages::-webkit-scrollbar {
+    width: 6px;
+  }
+  .chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+  }
+
+  .message {
+    max-width: 80%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    line-height: 1.5;
+    animation: slideUp 0.3s ease-out;
+    word-wrap: break-word;
+  }
+
+  .message.bot {
+    align-self: flex-start;
+    background: var(--bot-msg-bg);
+    border-bottom-left-radius: 2px;
+  }
+
+  .message.user {
+    align-self: flex-end;
+    background: var(--user-msg-bg);
+    border-bottom-right-radius: 2px;
+    color: #fff;
+  }
+
+  .chat-input-area {
+    padding: 20px;
+    border-top: 1px solid var(--glass-border);
+    display: flex;
+    gap: 10px;
+  }
+
+  .chat-input {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    border-radius: 25px;
+    padding: 12px 20px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+  }
+
+  .chat-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(255, 219, 112, 0.2);
+  }
+
+  .send-btn {
+    background: var(--primary-color);
+    color: #0f0c29;
+    border: none;
+    border-radius: 25px;
+    padding: 0 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 219, 112, 0.3);
+  }
+
+  .typing-indicator {
+    display: none;
+    align-self: flex-start;
+    background: var(--bot-msg-bg);
+    padding: 12px 16px;
+    border-radius: 12px;
+    border-bottom-left-radius: 2px;
+    margin-bottom: 15px;
+  }
+
+  .typing-indicator span {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    margin: 0 2px;
+    animation: bounce 1.4s infinite ease-in-out both;
+  }
+
+  .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+  .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+  }
+</style>
+</head>
+<body>
+
+<div class="chat-container">
+  <div class="chat-header">
+    <div class="bot-avatar">AI</div>
+    <div class="header-info">
+      <h2>ExportEase AI</h2>
+      <p>Multi-LLM Orchestration Active • Online</p>
+    </div>
+  </div>
+
+  <div class="chat-messages" id="chatMessages">
+    <div class="message bot">
+      Hello! I am ExportEase AI, powered by the Multi-LLM Orchestration Layer. How can I assist you with your export documentation or compliance today?
+    </div>
+    <div class="typing-indicator" id="typingIndicator">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="chat-input-area">
+    <input type="text" id="userInput" class="chat-input" placeholder="Ask about HS Codes, compliance, or documents..." autocomplete="off">
+    <button id="sendBtn" class="send-btn">Send</button>
+  </div>
+</div>
+
+<script>
+  const messagesContainer = document.getElementById('chatMessages');
+  const userInput = document.getElementById('userInput');
+  const sendBtn = document.getElementById('sendBtn');
+  const typingIndicator = document.getElementById('typingIndicator');
+
+  const addMessage = (text, sender) => {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `message ${sender}`;
+    msgDiv.textContent = text;
+    
+    // Insert before typing indicator
+    messagesContainer.insertBefore(msgDiv, typingIndicator);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  };
+
+  const handleSend = async () => {
+    const text = userInput.value.trim();
+    if (!text) return;
+
+    // Add user message
+    addMessage(text, 'user');
+    userInput.value = '';
+
+    // Show typing indicator
+    typingIndicator.style.display = 'block';
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    try {
+      // Make real API call to Python backend
+      const response = await fetch('http://localhost:8000/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text })
+      });
+      
+      const data = await response.json();
+      typingIndicator.style.display = 'none';
+      
+      if (response.ok) {
+        addMessage(data.response, 'bot');
+      } else {
+        addMessage("Error: Could not process request.", 'bot');
+      }
+    } catch (error) {
+      typingIndicator.style.display = 'none';
+      addMessage("Error: Cannot connect to the local AI server. Make sure server.py is running.", 'bot');
+    }
+  };
+
+  sendBtn.addEventListener('click', handleSend);
+  userInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') handleSend();
+  });
+</script>
+
+</body>
+</html>
