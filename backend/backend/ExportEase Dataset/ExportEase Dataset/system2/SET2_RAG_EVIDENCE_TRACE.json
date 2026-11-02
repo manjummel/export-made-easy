@@ -1,0 +1,59 @@
+{
+  "query": "I want to export turmeric powder to Germany.",
+  "trace": [
+    {
+      "step": "QUERY_ANALYSIS",
+      "extracted_product": "turmeric powder",
+      "extracted_destination": "Germany",
+      "jurisdiction_code": "DE",
+      "hs_code_candidate": "091030"
+    },
+    {
+      "step": "FILTER_CONSTRUCTION",
+      "applied_filters": {
+        "country": ["DE", "EU"],
+        "verification_status": "VERIFIED"
+      }
+    },
+    {
+      "step": "DENSE_SEARCH",
+      "candidates_retrieved": 5,
+      "top_score": 0.885
+    },
+    {
+      "step": "BM25_SEARCH",
+      "candidates_retrieved": 5,
+      "exact_keyword_matches": ["turmeric powder", "Germany", "import requirements"]
+    },
+    {
+      "step": "HYBRID_FUSION",
+      "fusion_mode": "RRF",
+      "top_candidate_chunk_id": "chk-turmeric-de-001"
+    },
+    {
+      "step": "RERANK_AND_CONFIDENCE",
+      "top_score": 0.892,
+      "confidence_level": "HIGH"
+    },
+    {
+      "step": "EVIDENCE_RESOLUTION",
+      "chunk_id": "chk-turmeric-de-001",
+      "document_id": "doc-spices-de-2024",
+      "authority": "EU Food Safety Authority / DGFT",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "step": "CITATION_GENERATION",
+      "citation_id": "cit-turmeric-de-001",
+      "source_id": "src-1001",
+      "url": "https://www.dgft.gov.in/CP/?opt=ft-policy",
+      "text_snippet": "Spices including turmeric powder (HS 091030) exported to EU member states including Germany require phytosanitary certification and maximum residue limit (MRL) compliance."
+    }
+  ],
+  "verification": {
+    "provenance_valid": true,
+    "unverified_leaks": false,
+    "qdrant_exposed": false,
+    "status": "PASS"
+  }
+}

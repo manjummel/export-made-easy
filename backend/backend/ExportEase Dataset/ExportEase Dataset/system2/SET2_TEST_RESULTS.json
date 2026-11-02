@@ -1,0 +1,122 @@
+{
+  "system": "ExportEase AI Knowledge and Retrieval Engine",
+  "system_id": "EXPORT-EASE-KNOWLEDGE-V1",
+  "audit_timestamp": "2026-08-12T12:40:00Z",
+  "test_suites": [
+    {
+      "id": "PROMPT_01_02",
+      "name": "Environment & Qdrant Setup",
+      "file": "tests/contract/test_contract_health.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_03",
+      "name": "Source Registry",
+      "file": "tests/contract/test_contract_sources.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_04",
+      "name": "Document Ingestion & Provenance",
+      "file": "tests/contract/test_contract_provenance.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_05",
+      "name": "Structured Data Ingestion",
+      "file": "tests/contract/test_contract_structured_ingest.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_06",
+      "name": "Normalization Layer",
+      "file": "tests/contract/test_contract_normalization.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_07",
+      "name": "Cleaning & Deduplication Pipeline",
+      "file": "tests/contract/test_contract_cleaner.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_08",
+      "name": "Provenance & Verification Engine",
+      "file": "tests/contract/test_contract_evidence.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_09",
+      "name": "Regulatory Versioning",
+      "file": "tests/contract/test_contract_versioning.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_10",
+      "name": "Verified Knowledge Dataset & Status",
+      "file": "tests/contract/test_contract_status.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_11",
+      "name": "Instruction-Tuning Dataset Export",
+      "file": "tests/contract/test_contract_training.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_12_13",
+      "name": "Stable Chunking & Metadata Filtering",
+      "file": "tests/contract/test_contract_chunking.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_14",
+      "name": "Embedding Pipeline Tracking",
+      "file": "tests/contract/test_contract_embedding.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_15",
+      "name": "Internal Qdrant Abstraction Layer",
+      "file": "tests/contract/test_contract_qdrant_abstraction.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_16",
+      "name": "Dense Retrieval & Result Schema",
+      "file": "tests/contract/test_contract_dense_retrieval.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_17",
+      "name": "BM25 & Hybrid Retrieval",
+      "file": "tests/contract/test_contract_hybrid.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_18",
+      "name": "Reranking & Retrieval Confidence",
+      "file": "tests/contract/test_contract_confidence.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_19",
+      "name": "Citation & Evidence API",
+      "file": "tests/contract/test_contract_citations.py",
+      "status": "PASSED"
+    },
+    {
+      "id": "PROMPT_20",
+      "name": "Integration Test Suite & Service Completion",
+      "file": "scripts/knowledge_integration_test.py",
+      "status": "PASSED"
+    }
+  ],
+  "summary": {
+    "total": 18,
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0,
+    "blocked_external_dependencies": 2
+  }
+}

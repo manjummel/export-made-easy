@@ -1,0 +1,105 @@
+version: "3.9"
+
+networks:
+  # Internal network — ONLY system2 and qdrant communicate on this network.
+  # System 1 and System 3 must call the system2 API; they never see qdrant directly.
+  exportease-internal:
+    driver: bridge
+    internal: false  # system2 needs outbound access for git contract fallback
+
+services:
+  # ──────────────────────────────────────────────────────────────────────────
+  # System 2: EXPORT-EASE-KNOWLEDGE-V1
+  # ──────────────────────────────────────────────────────────────────────────
+  system2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: export-ease-knowledge-v1
+    restart: unless-stopped
+    ports:
+      - "8100:8100"             # Exposed to external — System 1 and System 3 connect here
+    environment:
+      # Service Identity
+      - SERVICE_NAME=export-ease-knowledge-v1
+      - SERVICE_VERSION=1.0.0
+      - KNOWLEDGE_API_VERSION=v1
+      - ENVIRONMENT=development
+      - DEBUG=false
+      # Network
+      - KNOWLEDGE_SERVICE_PORT=8100
+      - KNOWLEDGE_SERVICE_HOST=0.0.0.0
+      # Contracts
+      - EXPORTEASE_CONTRACTS_PATH=/app/contracts
+      - EXPORTEASE_CONTRACTS_GIT_URL=${EXPORTEASE_CONTRACTS_GIT_URL:-}
+      # Qdrant — internal hostname, not exposed to host
+      - QDRANT_URL=http://qdrant:6333
+      - QDRANT_COLLECTION_NAME=exportease_knowledge
+      - QDRANT_VECTOR_SIZE=384
+      # Embeddings
+      - EMBEDDING_PROVIDER=sentence_transformers
+      - EMBEDDING_MODEL=all-MiniLM-L6-v2
+      # Retrieval
+      - RETRIEVAL_TOP_K=5
+      - RETRIEVAL_SCORE_THRESHOLD=0.60
+      - RETRIEVAL_MODE=hybrid
+      - CHUNK_SIZE=512
+      - CHUNK_OVERLAP=64
+      # Auth
+      - API_KEY_SECRET=${API_KEY_SECRET:-changeme-replace-in-production}
+      # System 1 & System 3 (non-required — graceful degradation)
+      - SYSTEM1_BASE_URL=${SYSTEM1_BASE_URL:-http://system1:8000}
+      - SYSTEM1_REQUIRED=false
+      - SYSTEM3_BASE_URL=${SYSTEM3_BASE_URL:-http://system3:8200}
+      - SYSTEM3_REQUIRED=false
+      # Logging
+      - LOG_LEVEL=INFO
+      - LOG_FORMAT=json
+    volumes:
+      - ./contracts:/app/contracts:ro   # Mount contracts read-only
+    networks:
+      - exportease-internal
+    depends_on:
+      qdrant:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # Qdrant Vector Database
+  # CRITICAL: Qdrant port (6333) is NOT exposed to the host machine in
+  # production. ONLY system2 can reach Qdrant via the internal Docker network.
+  # System 1 and System 3 must NEVER be given Qdrant credentials or URLs.
+  # ──────────────────────────────────────────────────────────────────────────
+  qdrant:
+    image: qdrant/qdrant:v1.9.4
+    container_name: exportease-qdrant
+    restart: unless-stopped
+    # NOTE: In production, remove the ports section entirely.
+    # For local development only, Qdrant UI is accessible at localhost:6333.
+    ports:
+      - "127.0.0.1:6333:6333"   # Bind to localhost only (not 0.0.0.0)
+      - "127.0.0.1:6334:6334"   # gRPC (localhost only)
+    volumes:
+      - qdrant_storage:/qdrant/storage
+      - ./docker/qdrant/config.yaml:/qdrant/config/production.yaml:ro
+    networks:
+      - exportease-internal
+    environment:
+      - QDRANT__SERVICE__HTTP_PORT=6333
+      - QDRANT__SERVICE__GRPC_PORT=6334
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  qdrant_storage:
+    driver: local
+    name: exportease-qdrant-storage

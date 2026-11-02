@@ -1,0 +1,1532 @@
+openapi: "3.1.0"
+
+info:
+  title: ExportEase Knowledge API
+  version: "1.0.0"
+  description: |
+    System 2 — EXPORT-EASE-KNOWLEDGE-V1
+    
+    The ExportEase Knowledge API provides semantic search and retrieval-augmented
+    generation (RAG) capabilities over export compliance data, including HS codes,
+    trade agreements, sanctions lists, and regulatory documents.
+
+    This API is the **only** interface through which System 1 (LLM + Multi-Agent)
+    and System 3 (Backend) may interact with the knowledge store. Direct access to
+    the underlying vector database (Qdrant) is strictly forbidden for all external
+    systems.
+
+    ## Authentication
+    All endpoints require an `X-API-Key` header.
+
+    ## Versioning
+    All knowledge endpoints are prefixed with `/v1/`.
+
+  contact:
+    name: ExportEase Platform Team
+    email: platform@exportease.ai
+
+  license:
+    name: Proprietary
+
+servers:
+  - url: "http://localhost:8100"
+    description: Local development
+  - url: "http://system2:8100"
+    description: Docker internal network
+  - url: "https://knowledge.exportease.ai"
+    description: Production
+
+tags:
+  - name: Health
+    description: Service health and readiness probes
+  - name: Knowledge
+    description: RAG query and semantic search
+  - name: Documents
+    description: Document ingestion and management
+  - name: Collections
+    description: Vector collection management
+
+# ──────────────────────────────────────────────
+# SECURITY
+# ──────────────────────────────────────────────
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+
+  schemas:
+    # ── Health ──────────────────────────────────
+    HealthResponse:
+      type: object
+      required: [status, service, version, timestamp]
+      properties:
+        status:
+          type: string
+          enum: [ok, degraded, error]
+          example: ok
+        service:
+          type: string
+          example: export-ease-knowledge-v1
+        version:
+          type: string
+          example: "1.0.0"
+        timestamp:
+          type: string
+          format: date-time
+        uptime_seconds:
+          type: number
+          example: 3600.5
+
+    ReadinessResponse:
+      type: object
+      required: [status, checks]
+      properties:
+        status:
+          type: string
+          enum: [ready, not_ready]
+          example: ready
+        checks:
+          type: object
+          properties:
+            qdrant:
+              type: string
+              enum: [ok, error, pending]
+              example: ok
+            contracts:
+              type: string
+              enum: [ok, error, pending]
+              example: ok
+            system1:
+              type: string
+              enum: [ok, error, pending]
+              example: pending
+            system3:
+              type: string
+              enum: [ok, error, pending]
+              example: pending
+        message:
+          type: string
+          example: All required services reachable
+
+    VersionResponse:
+      type: object
+      required: [service, version, api_version, knowledge_api_version, build_time]
+      properties:
+        service:
+          type: string
+          example: export-ease-knowledge-v1
+        version:
+          type: string
+          example: "1.0.0"
+        api_version:
+          type: string
+          example: v1
+        knowledge_api_version:
+          type: string
+          example: "1.0.0"
+        build_time:
+          type: string
+          format: date-time
+        contract_hash:
+          type: string
+          example: "sha256:abc123"
+
+    KnowledgeVersionResponse:
+      type: object
+      required: [dataset_version, embedding_version, retrieval_version, reranker_version, api_version]
+      properties:
+        dataset_version:
+          type: string
+          example: "1.0.0"
+        embedding_version:
+          type: string
+          example: "all-MiniLM-L6-v2"
+        retrieval_version:
+          type: string
+          example: "1.0.0"
+        reranker_version:
+          type: string
+          example: "none"
+        api_version:
+          type: string
+          example: "v1"
+
+    KnowledgeStatusResponse:
+      type: object
+      required: [record_count, verified_count, dataset_version, last_updated, coverage_summary]
+      properties:
+        record_count:
+          type: integer
+          example: 1045
+        verified_count:
+          type: integer
+          example: 1000
+        dataset_version:
+          type: string
+          example: "1.0.0"
+        last_updated:
+          type: string
+          format: date-time
+        coverage_summary:
+          type: object
+          additionalProperties:
+            type: integer
+          example:
+            "EU": 450
+            "US": 550
+
+    TrainingDatasetManifest:
+      type: object
+      required: [dataset_id, dataset_version, schema_version, record_count]
+      properties:
+        dataset_id:
+          type: string
+          example: "exportease-knowledge-verified"
+        dataset_version:
+          type: string
+          example: "1.0.0"
+        schema_version:
+          type: string
+          example: "v1"
+        record_count:
+          type: integer
+          example: 1000
+
+    EmbeddingStatusResponse:
+      type: object
+      required: [embedding_model_version, embedding_dimension, dataset_version]
+      properties:
+        embedding_model_version:
+          type: string
+          example: "all-MiniLM-L6-v2"
+        embedding_dimension:
+          type: integer
+          example: 384
+        dataset_version:
+          type: string
+          example: "1.0.0"
+
+    # ── Knowledge Query ──────────────────────────
+    QueryRequest:
+      type: object
+      required: [query]
+      properties:
+        query:
+          type: string
+          minLength: 3
+          maxLength: 2000
+          example: "What are the HS codes for automotive parts exported to Germany?"
+        collection:
+          type: string
+          default: exportease_knowledge
+          example: exportease_knowledge
+        top_k:
+          type: integer
+          minimum: 1
+          maximum: 20
+          default: 5
+          example: 5
+        score_threshold:
+          type: number
+          minimum: 0.0
+          maximum: 1.0
+          default: 0.60
+          example: 0.60
+        filters:
+          $ref: "#/components/schemas/MetadataFilters"
+        include_sources:
+          type: boolean
+          default: true
+        retrieval_mode:
+          type: string
+          enum: [dense, sparse, hybrid]
+          default: hybrid
+
+    MetadataFilters:
+      type: object
+      properties:
+        country:
+          type: array
+          items:
+            type: string
+        jurisdiction:
+          type: array
+          items:
+            type: string
+        product:
+          type: array
+          items:
+            type: string
+        product_category:
+          type: array
+          items:
+            type: string
+        hs_code:
+          type: array
+          items:
+            type: string
+        authority:
+          type: array
+          items:
+            type: string
+        document_type:
+          type: array
+          items:
+            type: string
+        topic:
+          type: array
+          items:
+            type: string
+        language:
+          type: array
+          items:
+            type: string
+        verification_status:
+          type: string
+        effective_after:
+          type: string
+          format: date
+          example: "2023-01-01"
+        effective_before:
+          type: string
+          format: date
+          example: "2026-12-31"
+
+    NormalizedRecord:
+      type: object
+      required: [chunk_id, document_id, text]
+      properties:
+        chunk_id:
+          type: string
+          example: "chunk-8708-003"
+        document_id:
+          type: string
+          example: "doc-hs-8708"
+        source_id:
+          type: string
+          example: "src-1001"
+        text:
+          type: string
+          example: "HS Code 8708: Parts and accessories of motor vehicles..."
+        authority:
+          type: string
+        title:
+          type: string
+        topic:
+          type: string
+        product:
+          type: string
+        hs_code:
+          type: string
+        country:
+          type: array
+          items:
+            type: string
+        language:
+          type: string
+        page:
+          type: integer
+        section:
+          type: string
+        publication_date:
+          type: string
+          format: date
+        effective_date:
+          type: string
+          format: date
+        superseded:
+          type: boolean
+          example: false
+        dataset_version:
+          type: string
+          example: "1.0.0"
+        verification_status:
+          type: string
+        score:
+          type: number
+          example: 0.87
+
+    SourceResponse:
+      type: object
+      required: [source_id, authority, title, url, source_type, publication_date, effective_date, retrieval_date, language, verification_status]
+      properties:
+        source_id:
+          type: string
+          example: "src-1001"
+        authority:
+          type: string
+          example: "Directorate General of Foreign Trade (DGFT)"
+        title:
+          type: string
+          example: "Foreign Trade Policy 2023"
+        url:
+          type: string
+          format: uri
+          example: "https://www.dgft.gov.in/CP/?opt=ft-policy"
+        source_type:
+          type: string
+          enum: [regulation, agreement, guideline, official_publication, unknown]
+          example: "regulation"
+        publication_date:
+          type: string
+          format: date
+          example: "2023-03-31"
+        effective_date:
+          type: string
+          format: date
+          example: "2023-04-01"
+        retrieval_date:
+          type: string
+          format: date-time
+          example: "2023-10-15T10:00:00Z"
+        language:
+          type: string
+          example: "en"
+        verification_status:
+          type: string
+          enum: [VERIFIED, REVIEW_REQUIRED, REJECTED]
+          example: "VERIFIED"
+
+    QueryResponse:
+      type: object
+      required: [query_id, answer, sources, retrieval_count, latency_ms]
+      properties:
+        query_id:
+          type: string
+          format: uuid
+          example: "550e8400-e29b-41d4-a716-446655440000"
+        answer:
+          type: string
+          example: "For automotive parts exported to Germany (EU), the applicable HS codes are..."
+        sources:
+          type: array
+          items:
+            $ref: "#/components/schemas/NormalizedRecord"
+        retrieval_count:
+          type: integer
+          example: 5
+        latency_ms:
+          type: number
+          example: 234.5
+        model_used:
+          type: string
+          example: all-MiniLM-L6-v2
+
+    SearchRequest:
+      type: object
+      required: [query]
+      properties:
+        query:
+          type: string
+          minLength: 3
+          maxLength: 2000
+          example: "import duty exemption"
+        collection:
+          type: string
+          default: exportease_knowledge
+        top_k:
+          type: integer
+          minimum: 1
+          maximum: 50
+          default: 10
+        score_threshold:
+          type: number
+          default: 0.50
+        filters:
+          $ref: "#/components/schemas/MetadataFilters"
+
+    HybridRetrieveRequest:
+      type: object
+      required: [query]
+      properties:
+        query:
+          type: string
+        filters:
+          $ref: "#/components/schemas/MetadataFilters"
+        top_k:
+          type: integer
+          example: 10
+
+    ConfidenceLevel:
+      type: string
+      enum: [HIGH, MEDIUM, LOW, INSUFFICIENT_GROUNDING]
+      example: "HIGH"
+
+    ConfidenceRequest:
+      type: object
+      required: [query, results]
+      properties:
+        query:
+          type: string
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/RetrievalResult"
+
+    ConfidenceResponse:
+      type: object
+      required: [confidence_level]
+      properties:
+        confidence_level:
+          $ref: "#/components/schemas/ConfidenceLevel"
+
+    HybridRetrieveResponse:
+      type: object
+      required: [results, confidence, metadata, retrieval_version]
+      properties:
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/RetrievalResult"
+        confidence:
+          $ref: "#/components/schemas/ConfidenceLevel"
+        metadata:
+          type: object
+          additionalProperties: true
+        retrieval_version:
+          type: string
+          example: "1.0.0"
+
+    SearchResponse:
+      type: object
+      required: [query, results, processing_time_ms]
+      properties:
+        query:
+          type: string
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/RetrievalResult"
+        processing_time_ms:
+          type: number
+        total_results:
+          type: integer
+        latency_ms:
+          type: number
+
+    # ── Document Ingestion ───────────────────────
+    DocumentMetadata:
+      type: object
+      required: [document_type, jurisdiction]
+      properties:
+        document_type:
+          type: string
+          enum: [hs_code, trade_agreement, sanction, regulation, guideline]
+        jurisdiction:
+          type: array
+          items:
+            type: string
+          example: ["IN", "EU"]
+        source_id:
+          type: string
+          example: "src-1001"
+        source_url:
+          type: string
+          format: uri
+        effective_date:
+          type: string
+          format: date
+        expiry_date:
+          type: string
+          format: date
+        language:
+          type: string
+          default: en
+          example: en
+        tags:
+          type: array
+          items:
+            type: string
+
+    IngestRequest:
+      type: object
+      required: [content, metadata]
+      properties:
+        content:
+          type: string
+          minLength: 10
+          example: "HS Code 8708 covers parts and accessories of motor vehicles..."
+        metadata:
+          $ref: "#/components/schemas/DocumentMetadata"
+        collection:
+          type: string
+          default: exportease_knowledge
+        document_id:
+          type: string
+          description: Optional — will be auto-generated if not provided
+
+    IngestResponse:
+      type: object
+      required: [document_id, chunks_created, chunks_rejected, status]
+      properties:
+        document_id:
+          type: string
+          example: "doc-8708-v1"
+        chunks_created:
+          type: integer
+          example: 3
+        chunks_rejected:
+          type: integer
+          example: 0
+        status:
+          type: string
+          enum: [ingested, updated, failed]
+          example: ingested
+        collection:
+          type: string
+          example: exportease_knowledge
+        timestamp:
+          type: string
+          format: date-time
+
+    DocumentProvenanceResponse:
+      type: object
+      required: [document_id, content_hash, retrieval_time, metadata]
+      properties:
+        document_id:
+          type: string
+          example: "doc-8708-v1"
+        source_id:
+          type: string
+          example: "src-1001"
+        content_hash:
+          type: string
+          example: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        retrieval_time:
+          type: string
+          format: date-time
+        metadata:
+          $ref: "#/components/schemas/DocumentMetadata"
+
+    BatchIngestRequest:
+      type: object
+      required: [documents]
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: "#/components/schemas/IngestRequest"
+          minItems: 1
+          maxItems: 100
+        collection:
+          type: string
+          default: exportease_knowledge
+
+    BatchIngestResponse:
+      type: object
+      required: [total, succeeded, failed, results]
+      properties:
+        total:
+          type: integer
+        succeeded:
+          type: integer
+        failed:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/IngestResponse"
+
+    StructuredRecordDates:
+      type: object
+      properties:
+        effective_date:
+          type: string
+          format: date
+          example: "2023-01-01"
+        expiry_date:
+          type: string
+          format: date
+          example: "2026-12-31"
+
+    StructuredRecordIngestRequest:
+      type: object
+      required: [country, product, hs_code, authority, source_id]
+      properties:
+        country:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          example: ["EU", "DE"]
+        product:
+          type: string
+          minLength: 2
+          example: "Automotive engine parts"
+        hs_code:
+          type: string
+          pattern: '^\d{2,10}$'
+          example: "870899"
+        dates:
+          $ref: "#/components/schemas/StructuredRecordDates"
+        authority:
+          type: string
+          minLength: 2
+          example: "European Commission"
+        source_id:
+          type: string
+          minLength: 3
+          example: "src-1001"
+        collection:
+          type: string
+          default: exportease_knowledge
+
+    StructuredRecordIngestResponse:
+      type: object
+      required: [record_id, document_id, chunks_created, chunks_rejected, status]
+      properties:
+        record_id:
+          type: string
+          example: "rec-870899-1001"
+        document_id:
+          type: string
+          example: "doc-rec-870899"
+        chunks_created:
+          type: integer
+          example: 1
+        chunks_rejected:
+          type: integer
+          example: 0
+        status:
+          type: string
+          enum: [ingested, failed]
+          example: ingested
+
+    # ── Collections ──────────────────────────────
+    CollectionInfo:
+      type: object
+      required: [name, vectors_count, status]
+      properties:
+        name:
+          type: string
+          example: exportease_knowledge
+        vectors_count:
+          type: integer
+          example: 1542
+        status:
+          type: string
+          enum: [green, yellow, red]
+          example: green
+        vector_size:
+          type: integer
+          example: 384
+        created_at:
+          type: string
+          format: date-time
+
+    CollectionCreateRequest:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+          example: exportease_knowledge_v2
+        vector_size:
+          type: integer
+          default: 384
+          example: 384
+        distance:
+          type: string
+          enum: [Cosine, Euclid, Dot]
+          default: Cosine
+
+    # ── Errors ───────────────────────────────────
+    ErrorResponse:
+      type: object
+      required: [error, message, status_code]
+      properties:
+        error:
+          type: string
+          example: VALIDATION_ERROR
+        message:
+          type: string
+          example: "Query must be at least 3 characters long"
+        status_code:
+          type: integer
+          example: 422
+        detail:
+          type: object
+          additionalProperties: true
+        request_id:
+          type: string
+          format: uuid
+
+# ──────────────────────────────────────────────
+# PATHS
+# ──────────────────────────────────────────────
+security:
+  - ApiKeyAuth: []
+
+paths:
+  /health:
+    get:
+      tags: [Health]
+      operationId: getHealth
+      summary: Service health check
+      description: Returns the current health status of System 2. Does not require authentication.
+      security: []
+      responses:
+        "200":
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+        "503":
+          description: Service is degraded or unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+
+  /ready:
+    get:
+      tags: [Health]
+      operationId: getReadiness
+      summary: Readiness probe
+      description: |
+        Returns readiness status. System 2 is "ready" when:
+        - Qdrant is reachable (required)
+        - API contracts are loaded (required)
+        - System 1 and System 3 connectivity is checked but non-blocking
+      security: []
+      responses:
+        "200":
+          description: System is ready to serve requests
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReadinessResponse"
+        "503":
+          description: System is not ready (Qdrant unreachable or contracts invalid)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReadinessResponse"
+
+  /version:
+    get:
+      tags: [Health]
+      operationId: getVersion
+      summary: API version information
+      security: []
+      responses:
+        "200":
+          description: Version information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VersionResponse"
+
+  /v1/sources/{source_id}:
+    get:
+      tags: [Sources]
+      operationId: getSource
+      summary: Retrieve source information by source_id
+      description: |
+        System 1 and external clients can inspect source metadata.
+      parameters:
+        - name: source_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Source details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SourceResponse"
+        "404":
+          description: Source not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/sources/batch:
+    post:
+      tags: [Sources]
+      operationId: getBatchSources
+      summary: Batch retrieve sources by source_ids
+      description: |
+        Suitable for System 3 and System 4 backend lookup.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchSourceRequest"
+      responses:
+        "200":
+          description: List of sources
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SourceResponse"
+
+  /v1/evidence/{chunk_id}:
+    get:
+      tags: [Evidence]
+      operationId: getEvidenceChunk
+      summary: Retrieve evidence chunk by ID
+      description: |
+        Returns the exact NormalizedRecord for a chunk_id to resolve citations.
+      parameters:
+        - name: chunk_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Evidence record
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NormalizedRecord"
+        "404":
+          description: Evidence chunk not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/evidence:
+    post:
+      tags: [Evidence]
+      operationId: getBatchEvidence
+      summary: Batch retrieve evidence chunks by IDs
+      description: |
+        Returns NormalizedRecords for a batch of chunk_ids. Never returns unverified records.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchEvidenceRequest"
+      responses:
+        "200":
+          description: Batch evidence records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NormalizedRecord"
+
+  /v1/citations:
+    post:
+      tags: [Evidence]
+      operationId: getBatchCitations
+      summary: Resolve citations from chunk IDs
+      description: |
+        Returns formatted Citation objects for System 1. Never returns unverified citations.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchCitationRequest"
+      responses:
+        "200":
+          description: List of citations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Citation"
+
+  /v1/retrieve:
+    post:
+      tags: [Knowledge]
+      operationId: retrieveKnowledge
+      summary: Pure vector similarity search (alias for /search)
+      description: |
+        Pure semantic search over the knowledge store returning raw chunk matches.
+        System 1 uses this to retrieve verified records based on the shared retrieval schema.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchRequest"
+      responses:
+        "200":
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/retrieve/hybrid:
+    post:
+      tags: [Knowledge]
+      operationId: retrieveHybrid
+      summary: Explicitly perform BM25 + Dense Hybrid Retrieval
+      description: |
+        Returns ranked results, a confidence score, and internal retrieval versions.
+        Does not leak Qdrant internal payload schemas.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HybridRetrieveRequest"
+      responses:
+        "200":
+          description: Ranked results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HybridRetrieveResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/confidence:
+    post:
+      tags: [Knowledge]
+      operationId: calculateConfidence
+      summary: Calculate retrieval confidence
+      description: |
+        Evaluates a set of retrieval results against a query and returns 
+        the confidence level (HIGH, MEDIUM, LOW, INSUFFICIENT_GROUNDING).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConfidenceRequest"
+      responses:
+        "200":
+          description: Confidence evaluation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfidenceResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/knowledge/query:
+    post:
+      tags: [Knowledge]
+      operationId: queryKnowledge
+      summary: RAG query — retrieve and generate grounded answer
+      description: |
+        Accepts a natural language query, performs hybrid semantic search over
+        the knowledge store, and returns a grounded answer with source citations.
+        This is the primary endpoint consumed by System 1.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryRequest"
+      responses:
+        "200":
+          description: Successful RAG response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryResponse"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Unauthorized — missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "422":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Service unavailable — Qdrant unreachable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/knowledge/search:
+    post:
+      tags: [Knowledge]
+      operationId: searchKnowledge
+      summary: Pure vector similarity search (no generation)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchRequest"
+      responses:
+        "200":
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/knowledge/version:
+    get:
+      tags: [Knowledge]
+      operationId: getKnowledgeVersion
+      summary: Retrieve regulatory and pipeline version metadata
+      description: |
+        Returns the current active versions for the underlying dataset, embeddings, 
+        and retrieval algorithms. System 1 MUST inspect these versions before generating responses.
+      responses:
+        "200":
+          description: Version metadata
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KnowledgeVersionResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/knowledge/status:
+    get:
+      tags: [Knowledge]
+      operationId: getKnowledgeStatus
+      summary: Retrieve dataset status and coverage summary
+      description: |
+        Returns administrative status of the RAG dataset, including total records, 
+        verified records count, versioning, and coverage breakdowns.
+      responses:
+        "200":
+          description: Dataset status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KnowledgeStatusResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/training-dataset/version:
+    get:
+      tags: [Training]
+      operationId: getTrainingDatasetVersion
+      summary: Retrieve the training dataset manifest
+      description: |
+        Returns the dataset_id, dataset_version, schema_version, and total record_count.
+        System 1 MUST validate this manifest before commencing instruction tuning.
+      responses:
+        "200":
+          description: Dataset manifest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrainingDatasetManifest"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/training-dataset/export:
+    get:
+      tags: [Training]
+      operationId: exportTrainingDataset
+      summary: Bulk export of verified records for training
+      description: |
+        Provides an authenticated export mechanism for System 1 to consume the verified dataset 
+        without direct database access. Returns an array of NormalizedRecord.
+      responses:
+        "200":
+          description: Array of verified records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NormalizedRecord"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/embedding/status:
+    get:
+      tags: [Knowledge]
+      operationId: getEmbeddingStatus
+      summary: Retrieve the embedding pipeline status
+      description: |
+        Returns the embedding model version, dimension size, and dataset version.
+        System 1 consumes this to verify compatibility before parsing retrieved vectors.
+      responses:
+        "200":
+          description: Embedding pipeline metadata
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmbeddingStatusResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/documents/ingest:
+    post:
+      tags: [Documents]
+      operationId: ingestDocument
+      summary: Ingest a single document into the knowledge store
+      description: |
+        Accepts document content and metadata, chunks the text, generates embeddings,
+        and stores vectors in Qdrant. Returns the document ID and number of chunks created.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IngestRequest"
+      responses:
+        "201":
+          description: Document ingested successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IngestResponse"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/documents/batch:
+    post:
+      tags: [Documents]
+      operationId: batchIngestDocuments
+      summary: Batch ingest multiple documents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchIngestRequest"
+      responses:
+        "200":
+          description: Batch ingestion results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchIngestResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/documents/{document_id}:
+    get:
+      tags: [Documents]
+      operationId: getDocumentProvenance
+      summary: Retrieve document provenance metadata
+      description: |
+        Returns the ingestion record, including the exact content hash and retrieval time,
+        allowing a citation to be traced back to its specific ingestion event. Does NOT
+        return the raw document content or internal paths.
+      parameters:
+        - name: document_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Provenance metadata found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentProvenanceResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Document not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    delete:
+      tags: [Documents]
+      operationId: deleteDocument
+      summary: Delete a document and all its chunks from the knowledge store
+      parameters:
+        - name: document_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: collection
+          in: query
+          schema:
+            type: string
+            default: exportease_knowledge
+      responses:
+        "200":
+          description: Document deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  document_id:
+                    type: string
+                  chunks_deleted:
+                    type: integer
+                  status:
+                    type: string
+                    example: deleted
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Document not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/records/ingest:
+    post:
+      tags: [Documents]
+      operationId: ingestStructuredRecord
+      summary: Ingest a structured knowledge record
+      description: |
+        Ingests structured compliance data. The structured payload is formatted into
+        a searchable document and injected into the RAG pipeline. It strictly validates
+        the schema (country, product, hs_code, dates, authority, source_id).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StructuredRecordIngestRequest"
+      responses:
+        "201":
+          description: Structured record successfully ingested
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StructuredRecordIngestResponse"
+        "400":
+          description: Bad request / Malformed record
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "422":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/collections:
+    get:
+      tags: [Collections]
+      operationId: listCollections
+      summary: List all knowledge collections
+      responses:
+        "200":
+          description: List of collections
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collections:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/CollectionInfo"
+                  total:
+                    type: integer
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    post:
+      tags: [Collections]
+      operationId: createCollection
+      summary: Create a new knowledge collection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CollectionCreateRequest"
+      responses:
+        "201":
+          description: Collection created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CollectionInfo"
+        "400":
+          description: Collection already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/collections/{collection_name}:
+    delete:
+      tags: [Collections]
+      operationId: deleteCollection
+      summary: Delete a knowledge collection
+      parameters:
+        - name: collection_name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Collection deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  status:
+                    type: string
+                    example: deleted
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Collection not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/collections/{collection_name}/stats:
+    get:
+      tags: [Collections]
+      operationId: getCollectionStats
+      summary: Get statistics for a collection
+      parameters:
+        - name: collection_name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Collection statistics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CollectionInfo"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Collection not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
