@@ -3,6 +3,8 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
+import { CurrencyConverterWidget } from '../currency';
+import { ErrorBoundary } from '../ui';
 import CommandPalette from './CommandPalette';
 import CinematicBackground from './CinematicBackground';
 import { AIStrategyExperience } from '../strategy';
@@ -94,9 +96,12 @@ export default function AppShell() {
                 animate="visible"
                 exit="exit"
               >
-                <Outlet context={{ openStrategyExperience: () => setStrategyModalOpen(true) }} />
+                <ErrorBoundary>
+                  <Outlet context={{ openStrategyExperience: () => setStrategyModalOpen(true) }} />
+                </ErrorBoundary>
               </motion.div>
             </AnimatePresence>
+            <CurrencyConverterWidget />
           </div>
         </main>
         </div>
