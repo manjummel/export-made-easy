@@ -1,0 +1,109 @@
+[
+  {
+    "regulation_id": "DGFT-2023-001",
+    "title": "Foreign Trade Policy 2023 — Export Promotion Measures",
+    "issuing_authority": "Directorate General of Foreign Trade (DGFT), India",
+    "jurisdiction": ["IN"],
+    "document_type": "regulation",
+    "effective_date": "2023-04-01",
+    "expiry_date": null,
+    "language": "en",
+    "tags": ["DGFT", "FTP", "export-promotion", "India"],
+    "sections": [
+      {
+        "section_id": "FTP-2023-S1",
+        "title": "Section 1: Export of Dual-Use Goods (SCOMET)",
+        "content": "Export of Special Chemicals, Organisms, Materials, Equipment and Technologies (SCOMET) listed items requires a licence from DGFT. Exporters must file ANF 2M for SCOMET licence. Items include: (a) chemicals for dual-use (Category 1), (b) micro-organisms and toxins (Category 2), (c) materials (Category 3), (d) materials processing equipment (Category 4), (e) telecommunications and information security (Category 5), (f) sensors and lasers (Category 6), (g) navigation and avionics (Category 7), (h) marine (Category 8), (i) aerospace and propulsion (Category 9)."
+      },
+      {
+        "section_id": "FTP-2023-S2",
+        "title": "Section 2: Export Obligation Discharge under EPCG Scheme",
+        "content": "Exporters who have imported capital goods under the Export Promotion Capital Goods (EPCG) Scheme must fulfill an export obligation of 6x the duty saved within 6 years from the date of issue of the EPCG authorization. The export obligation can be fulfilled through direct exports or deemed exports as specified in FTP Chapter 5."
+      },
+      {
+        "section_id": "FTP-2023-S3",
+        "title": "Section 3: Status Holder Benefits",
+        "content": "Exporters with export performance are eligible for Status Holder designation: (a) One Star Export House: ₹3 crore, (b) Two Star Export House: ₹25 crore, (c) Three Star Export House: ₹100 crore, (d) Four Star Export House: ₹500 crore, (e) Five Star Export House: ₹2000 crore. Status Holders enjoy expedited customs clearance, exemption from Bank Guarantees, and other privileges."
+      }
+    ]
+  },
+  {
+    "regulation_id": "EU-DUAL-USE-2021",
+    "title": "EU Dual-Use Regulation 2021/821 — Controls on Exports, Brokering, Technical Assistance, Transit and Transfer",
+    "issuing_authority": "European Commission",
+    "jurisdiction": ["EU"],
+    "document_type": "regulation",
+    "effective_date": "2021-09-09",
+    "expiry_date": null,
+    "language": "en",
+    "tags": ["EU", "dual-use", "export-control", "Regulation-2021-821"],
+    "sections": [
+      {
+        "section_id": "EU-DU-ART1",
+        "title": "Article 1: Subject Matter and Scope",
+        "content": "This Regulation establishes a Union regime for the control of exports, brokering, technical assistance, transit and transfer of dual-use items. 'Dual-use items' means items, including software and technology, which can be used for both civil and military purposes."
+      },
+      {
+        "section_id": "EU-DU-ART3",
+        "title": "Article 3: Export Authorisation",
+        "content": "An authorisation shall be required for the export of dual-use items listed in Annex I. Authorisations shall be granted by the competent authority of the Member State where the exporter is established. Types of authorisation: (1) Individual Export Authorisation, (2) Global Export Authorisation, (3) National General Export Authorisation, (4) Union General Export Authorisation (UGEA)."
+      },
+      {
+        "section_id": "EU-DU-ART9",
+        "title": "Article 9: Catch-all Controls",
+        "content": "An authorisation shall be required for the export of dual-use items not listed in Annex I if the exporter has been informed by the competent authority of the Member State that the items are or may be intended for use in connection with the development, production, handling, operation, maintenance, storage, detection, identification or dissemination of chemical, biological, radiological or nuclear weapons."
+      }
+    ]
+  },
+  {
+    "regulation_id": "US-EAR-CCL-2024",
+    "title": "Export Administration Regulations (EAR) — Commerce Control List (CCL) Update 2024",
+    "issuing_authority": "Bureau of Industry and Security (BIS), U.S. Department of Commerce",
+    "jurisdiction": ["US"],
+    "document_type": "regulation",
+    "effective_date": "2024-01-15",
+    "expiry_date": null,
+    "language": "en",
+    "tags": ["BIS", "EAR", "CCL", "US-export-control", "ECCN"],
+    "sections": [
+      {
+        "section_id": "EAR-CCL-CAT3",
+        "title": "Category 3 — Electronics",
+        "content": "Export Control Classification Numbers (ECCNs) in Category 3 cover electronic components and equipment. 3E001 covers technology for the development or production of electronic components. 3A001 covers electronic components including: (a) general-purpose microprocessors with a clock frequency exceeding 5 GHz, (b) memory devices with a die density exceeding 10 Gb per sq cm, (c) programmable logic devices (PLDs) with more than 200,000 gate equivalents."
+      },
+      {
+        "section_id": "EAR-CCL-CAT5P2",
+        "title": "Category 5 Part 2 — Information Security",
+        "content": "5E002 covers technology for the development, production or use of controlled cryptographic equipment. Export and re-export of 5E002 items require a BIS licence to most destinations. ENC exceptions may apply for items using standard encryption algorithms (AES-256, RSA-2048+) that are commercially available."
+      },
+      {
+        "section_id": "EAR-DE-MINIMIS",
+        "title": "De Minimis Rule — Section 734.4",
+        "content": "Foreign-made items are subject to the EAR when they contain more than 25% controlled U.S.-origin content by value (the de minimis threshold). For items destined to countries subject to US arms embargo (D:5 countries), the threshold is 10%. Exporters must calculate the U.S. content of finished products to determine applicability."
+      }
+    ]
+  },
+  {
+    "regulation_id": "IN-CUSTOMS-GEN-2023",
+    "title": "Indian Customs — General Export Documentation Requirements 2023",
+    "issuing_authority": "Central Board of Indirect Taxes and Customs (CBIC), India",
+    "jurisdiction": ["IN"],
+    "document_type": "regulation",
+    "effective_date": "2023-01-01",
+    "expiry_date": null,
+    "language": "en",
+    "tags": ["India", "customs", "documentation", "CBIC", "ICEGATE"],
+    "sections": [
+      {
+        "section_id": "CBIC-DOCS-1",
+        "title": "Mandatory Export Documents",
+        "content": "All exporters must file a Shipping Bill on ICEGATE portal before goods are loaded. Required documents: (1) Commercial Invoice (with value in INR and foreign currency), (2) Packing List (with item-wise details), (3) Bill of Lading or Airway Bill, (4) Certificate of Origin (if claiming FTA benefits), (5) Export Licence (for restricted items under SCOMET or negative list), (6) Letter of Credit or payment terms documentation, (7) GST Invoice (with GSTIN of exporter), (8) ARE-1 form for excise-exempt exports."
+      },
+      {
+        "section_id": "CBIC-DOCS-2",
+        "title": "GST Refund on Exports",
+        "content": "Exporters are eligible for refund of Integrated GST (IGST) paid on exported goods or unutilized Input Tax Credit (ITC). Two methods available: (a) Export under LUT/Bond without payment of IGST and claim ITC refund, (b) Export with payment of IGST and claim refund from customs. Refund applications must be filed on the GST portal within 2 years of the date of export."
+      }
+    ]
+  }
+]

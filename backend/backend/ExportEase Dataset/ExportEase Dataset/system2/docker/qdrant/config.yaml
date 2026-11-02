@@ -1,0 +1,46 @@
+log_level: INFO
+log_format: json
+
+service:
+  http_port: 6333
+  grpc_port: 6334
+  # SECURITY: Do not expose Qdrant's REST API to external networks.
+  # System 2 is the ONLY service that communicates with Qdrant.
+  # System 1 and System 3 must NEVER be given this host/port.
+  host: "0.0.0.0"   # Bound inside Docker network only (not host network)
+
+storage:
+  storage_path: /qdrant/storage
+  snapshots_path: /qdrant/snapshots
+  on_disk_payload: true    # Store payloads on disk to reduce RAM usage
+
+  wal:
+    wal_capacity_mb: 32
+    wal_segments_ahead: 0
+
+  performance:
+    max_search_threads: 0   # 0 = auto (use all available cores)
+    max_optimization_threads: 1
+
+  quantization:
+    ignore_errors: false
+
+  hnsw_index:
+    m: 16
+    ef_construct: 100
+    full_scan_threshold: 10000
+    max_indexing_threads: 0
+    on_disk: false
+
+  optimizer:
+    deleted_threshold: 0.2
+    vacuum_min_vector_number: 1000
+    default_segment_number: 0
+    max_segment_size_kb: 200000
+    memmap_threshold_kb: 200000
+    indexing_threshold_kb: 20000
+    flush_interval_sec: 5
+    max_optimization_threads: 1
+
+cluster:
+  enabled: false   # Single-node for now; enable for production HA

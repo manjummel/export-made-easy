@@ -1,0 +1,85 @@
+[
+  {
+    "agreement_id": "INDIA-UAE-CEPA",
+    "title": "India-UAE Comprehensive Economic Partnership Agreement",
+    "parties": ["IN", "AE"],
+    "effective_date": "2022-05-01",
+    "document_type": "trade_agreement",
+    "jurisdiction": ["IN", "AE"],
+    "summary": "The India-UAE CEPA is a landmark free trade agreement that provides duty-free access for 90% of Indian goods exported to UAE and grants Indian importers preferential access to over 99% of UAE products. Key sectors include gems and jewellery, textiles, pharmaceuticals, engineering goods, and electronics.",
+    "key_provisions": [
+      {
+        "clause": "Article 2.3",
+        "title": "Tariff Elimination Schedule",
+        "content": "Each Party shall eliminate or reduce its customs duties on originating goods of the other Party in accordance with its Tariff Elimination Schedule set out in Annex 2-A."
+      },
+      {
+        "clause": "Article 3.1",
+        "title": "Rules of Origin",
+        "content": "A good shall be treated as an originating good of a Party if it is wholly obtained or produced entirely in the territory of one or both Parties, or satisfies the requirements of Annex 3-A."
+      },
+      {
+        "clause": "Article 3.5",
+        "title": "Cumulation",
+        "content": "For the purposes of determining whether a good is originating, a producer of a good may have recourse to the originating materials of both Parties."
+      },
+      {
+        "clause": "Article 7.1",
+        "title": "Sanitary and Phytosanitary Measures",
+        "content": "The Parties affirm their rights and obligations under the WTO Agreement on the Application of Sanitary and Phytosanitary Measures."
+      }
+    ],
+    "preferential_hs_codes": ["8708", "6109", "7113", "3004", "8471"],
+    "certificate_of_origin_required": true,
+    "tags": ["FTA", "CEPA", "Gulf", "South Asia"]
+  },
+  {
+    "agreement_id": "RCEP",
+    "title": "Regional Comprehensive Economic Partnership",
+    "parties": ["AU", "BN", "KH", "CN", "ID", "JP", "KR", "LA", "MY", "MM", "NZ", "PH", "SG", "TH", "VN"],
+    "effective_date": "2022-01-01",
+    "document_type": "trade_agreement",
+    "jurisdiction": ["AU", "BN", "KH", "CN", "ID", "JP", "KR", "LA", "MY", "MM", "NZ", "PH", "SG", "TH", "VN"],
+    "summary": "RCEP is the world's largest free trade agreement by GDP coverage, covering approximately 30% of global GDP. It includes ASEAN member states plus Australia, China, Japan, New Zealand, and South Korea. The agreement covers trade in goods, services, investment, intellectual property, e-commerce, competition policy, and SMEs.",
+    "key_provisions": [
+      {
+        "clause": "Chapter 2",
+        "title": "Trade in Goods",
+        "content": "Parties shall progressively liberalise trade in goods over a transition period. The agreement provides for tariff reductions and elimination on over 90% of goods traded between member countries."
+      },
+      {
+        "clause": "Chapter 3",
+        "title": "Rules of Origin",
+        "content": "A product qualifies as originating if it has undergone sufficient production within RCEP member countries. The Regional Value Content (RVC) threshold is generally 40% or a Change in Tariff Classification (CTC) criterion."
+      },
+      {
+        "clause": "Chapter 12",
+        "title": "Electronic Commerce",
+        "content": "Parties shall maintain a legal framework governing electronic transactions consistent with the principles of the UNCITRAL Model Law on Electronic Commerce."
+      }
+    ],
+    "preferential_hs_codes": ["8471", "8708", "7208", "6109"],
+    "certificate_of_origin_required": true,
+    "tags": ["RCEP", "ASEAN", "Asia-Pacific", "mega-FTA"]
+  },
+  {
+    "agreement_id": "EU-INDIA-BTIA",
+    "title": "EU-India Broad-Based Trade and Investment Agreement (Under Negotiation)",
+    "parties": ["EU", "IN"],
+    "effective_date": null,
+    "status": "under_negotiation",
+    "document_type": "trade_agreement",
+    "jurisdiction": ["EU", "IN"],
+    "summary": "The EU-India BTIA negotiations were relaunched in June 2022 after a decade-long pause. When concluded, it will be one of the most significant bilateral trade agreements between the EU and a major emerging economy. Key areas include goods, services, investment protection, government procurement, and sustainable development.",
+    "key_provisions": [
+      {
+        "clause": "Proposed Chapter 2",
+        "title": "Market Access for Goods",
+        "content": "Both parties aim for substantial liberalisation of tariffs with a target of 90%+ goods covered with preferential rates within 10 years of entry into force."
+      }
+    ],
+    "preferential_hs_codes": [],
+    "certificate_of_origin_required": false,
+    "tags": ["EU", "India", "BTIA", "under-negotiation"]
+  }
+]

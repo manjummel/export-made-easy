@@ -1,0 +1,98 @@
+[
+  {
+    "hs_code": "8708",
+    "description": "Parts and accessories of motor vehicles (headings 8701 to 8705).",
+    "subheadings": [
+      {"code": "8708.10", "description": "Bumpers and parts thereof"},
+      {"code": "8708.21", "description": "Safety seat belts"},
+      {"code": "8708.29", "description": "Other parts and accessories of bodies"},
+      {"code": "8708.30", "description": "Brakes and servo-brakes; parts thereof"},
+      {"code": "8708.40", "description": "Gear boxes and parts thereof"},
+      {"code": "8708.50", "description": "Drive-axles with differential"},
+      {"code": "8708.70", "description": "Road wheels and parts and accessories thereof"},
+      {"code": "8708.80", "description": "Suspension shock-absorbers"},
+      {"code": "8708.91", "description": "Radiators"},
+      {"code": "8708.92", "description": "Silencers (mufflers) and exhaust pipes"},
+      {"code": "8708.94", "description": "Steering wheels, steering columns and steering boxes"},
+      {"code": "8708.99", "description": "Other parts and accessories"}
+    ],
+    "applicable_duties": {
+      "EU": "3.5%",
+      "US": "2.5%",
+      "IN": "7.5%"
+    },
+    "jurisdiction": ["EU", "US", "IN", "UK", "AU"],
+    "document_type": "hs_code",
+    "effective_date": "2022-01-01",
+    "notes": "Exporters must provide certificate of origin for duty preference under FTAs. SCOMET controls may apply for dual-use components."
+  },
+  {
+    "hs_code": "8471",
+    "description": "Automatic data-processing machines and units thereof; magnetic or optical readers, machines for transcribing data onto data media in coded form.",
+    "subheadings": [
+      {"code": "8471.30", "description": "Portable automatic data-processing machines, weighing not more than 10 kg"},
+      {"code": "8471.41", "description": "Comprising in the same housing at least a central processing unit and an input and output unit"},
+      {"code": "8471.49", "description": "Other, presented in the form of systems"},
+      {"code": "8471.50", "description": "Processing units (other than those of subheadings 8471.41 or 8471.49)"},
+      {"code": "8471.60", "description": "Input or output units"},
+      {"code": "8471.70", "description": "Storage units"},
+      {"code": "8471.80", "description": "Other units of automatic data-processing machines"},
+      {"code": "8471.90", "description": "Other"}
+    ],
+    "applicable_duties": {
+      "EU": "0%",
+      "US": "0%",
+      "IN": "0%"
+    },
+    "jurisdiction": ["EU", "US", "IN", "CN", "JP"],
+    "document_type": "hs_code",
+    "effective_date": "2022-01-01",
+    "notes": "ITA signatory countries apply 0% duty. Export control regulations (EAR/ITAR) may apply to advanced computing equipment. Dual-use classification required for AI accelerators."
+  },
+  {
+    "hs_code": "3004",
+    "description": "Medicaments (excluding goods of heading 3002, 3005 or 3006) consisting of mixed or unmixed products for therapeutic or prophylactic uses, put up in measured doses or in forms or packings for retail sale.",
+    "subheadings": [
+      {"code": "3004.10", "description": "Containing penicillins or derivatives thereof"},
+      {"code": "3004.20", "description": "Containing other antibiotics"},
+      {"code": "3004.31", "description": "Containing insulin"},
+      {"code": "3004.32", "description": "Containing corticosteroid hormones"},
+      {"code": "3004.39", "description": "Other hormones"},
+      {"code": "3004.41", "description": "Containing ephedrine or its salts"},
+      {"code": "3004.50", "description": "Other medicaments containing vitamins"},
+      {"code": "3004.90", "description": "Other"}
+    ],
+    "applicable_duties": {
+      "EU": "0%",
+      "US": "0%",
+      "IN": "0%"
+    },
+    "jurisdiction": ["EU", "US", "IN", "BR", "ZA"],
+    "document_type": "hs_code",
+    "effective_date": "2022-01-01",
+    "notes": "Requires WHO GMP certification for export. Schedule H substances require additional licensing. Cold chain documentation mandatory for biologics."
+  },
+  {
+    "hs_code": "7208",
+    "description": "Flat-rolled products of iron or non-alloy steel, of a width of 600 mm or more, hot-rolled, not clad, plated or coated.",
+    "subheadings": [
+      {"code": "7208.10", "description": "In coils, not further worked than hot-rolled, with patterns in relief"},
+      {"code": "7208.25", "description": "Of a thickness of 4.75 mm or more"},
+      {"code": "7208.26", "description": "Of a thickness of 3 mm or more but less than 4.75 mm"},
+      {"code": "7208.27", "description": "Of a thickness of less than 3 mm"},
+      {"code": "7208.36", "description": "Of a thickness exceeding 10 mm"},
+      {"code": "7208.37", "description": "Of a thickness of 4.75 mm or more but not exceeding 10 mm"},
+      {"code": "7208.38", "description": "Of a thickness of 3 mm or more but less than 4.75 mm"},
+      {"code": "7208.39", "description": "Of a thickness of less than 3 mm"}
+    ],
+    "applicable_duties": {
+      "EU": "0%",
+      "US": "25%",
+      "IN": "12.5%"
+    },
+    "jurisdiction": ["EU", "US", "IN", "KR", "JP"],
+    "document_type": "hs_code",
+    "effective_date": "2022-01-01",
+    "notes": "Subject to US Section 232 tariffs (25%). EU safeguard measures may apply. Steel export documentation including mill certificates required."
+  }
+]
