@@ -19,3 +19,5 @@ export { default as Skeleton } from './Skeleton';
 export { default as Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from './Table';
 export { default as CustomCursor } from './CustomCursor';
 export { default as ErrorBoundary } from './ErrorBoundary';
+export { default as HSCodeChip } from './HSCodeChip';
+export { default as TariffBadge } from './TariffBadge';
