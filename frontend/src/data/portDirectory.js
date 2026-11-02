@@ -20,3 +20,23 @@ export const DESTINATION_HUBS = [
   { code: 'SGSIN', name: 'Port of Singapore', country: 'Singapore', region: 'Asia-Pacific', lat: 1.3521, lng: 103.8198 },
   { code: 'GBFXT', name: 'Port of Felixstowe', country: 'United Kingdom', region: 'Europe', lat: 51.9639, lng: 1.3511 }
 ];
+
+export const SHIPPING_CORRIDORS = [
+  { origin: 'INNSA', destination: 'AEJEA', seaDays: 3, airDays: 1, distNm: 1060, avgTeuUSD: 450, carriers: ['Maersk', 'MSC', 'Hapag-Lloyd', 'CMA CGM'] },
+  { origin: 'INNSA', destination: 'NLRTM', seaDays: 22, airDays: 2, distNm: 6300, avgTeuUSD: 1850, carriers: ['MSC', 'Maersk', 'ONE', 'COSCO'] },
+  { origin: 'INNSA', destination: 'DEHAM', seaDays: 24, airDays: 2, distNm: 6600, avgTeuUSD: 1950, carriers: ['Hapag-Lloyd', 'Maersk', 'MSC'] },
+  { origin: 'INMUN', destination: 'USLAX', seaDays: 32, airDays: 3, distNm: 9800, avgTeuUSD: 2400, carriers: ['Ocean Network Express', 'CMA CGM', 'Maersk'] },
+  { origin: 'INMAA', destination: 'SGSIN', seaDays: 5, airDays: 1, distNm: 1650, avgTeuUSD: 520, carriers: ['PIL', 'Evergreen', 'Wan Hai'] },
+  { origin: 'INNSA', destination: 'GBFXT', seaDays: 21, airDays: 2, distNm: 6200, avgTeuUSD: 1800, carriers: ['Maersk', 'CMA CGM', 'MSC'] }
+];
+
+export function getCorridorInfo(originCode, destinationCode) {
+  return SHIPPING_CORRIDORS.find(c => c.origin === originCode && c.destination === destinationCode) || {
+    origin: originCode,
+    destination: destinationCode,
+    seaDays: 20,
+    airDays: 2,
+    avgTeuUSD: 1600,
+    carriers: ['Standard Global Shipping Lines']
+  };
+}
