@@ -1,0 +1,49 @@
+# ============================================================
+# ExportEase AI - System 3 Backend Dependencies
+# EXPORT-EASE-BACKEND-V1
+# ============================================================
+
+# --- Core Framework ---
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.1
+
+# --- Database ---
+sqlalchemy==2.0.36
+asyncpg>=0.29.0        # Use latest with pre-built wheels for Python 3.14
+alembic==1.14.1
+# psycopg2-binary requires pg_config; install separately if PostgreSQL is set up
+# psycopg2-binary==2.9.10
+
+# --- Authentication ---
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.2.1
+python-multipart==0.0.20
+
+# --- HTTP Client ---
+httpx==0.28.1
+aiohttp>=3.10.0        # Use latest with pre-built wheels
+
+# --- WebSocket ---
+websockets==14.1
+
+# --- Utilities ---
+python-dotenv==1.0.1
+pytz==2024.2
+# orjson requires Rust; use a pre-built wheel or omit for dev
+# orjson==3.10.13
+tenacity==9.0.0
+
+# --- Testing ---
+pytest==8.3.4
+pytest-asyncio==0.25.0
+pytest-cov==6.0.0
+httpx==0.28.1
+
+# --- Logging ---
+structlog==24.4.0
+
+# --- Health & Monitoring ---
+prometheus-fastapi-instrumentator==7.0.2

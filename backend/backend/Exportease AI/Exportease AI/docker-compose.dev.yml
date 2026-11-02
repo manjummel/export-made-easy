@@ -1,0 +1,31 @@
+# ============================================================
+# ExportEase AI - Docker Compose Dev Override
+# EXPORT-EASE-BACKEND-V1
+# ============================================================
+# Use with: docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+# Enables hot-reload and dev-specific settings.
+
+version: "3.9"
+
+services:
+  backend:
+    build:
+      target: builder     # Use builder stage with all dev deps
+    command:
+      - "python"
+      - "-m"
+      - "uvicorn"
+      - "app.main:app"
+      - "--host"
+      - "0.0.0.0"
+      - "--port"
+      - "8000"
+      - "--reload"        # Hot reload
+      - "--log-level"
+      - "debug"
+    volumes:
+      - .:/app
+    environment:
+      DEBUG: "true"
+      LOG_LEVEL: "DEBUG"
+      ENVIRONMENT: "development"

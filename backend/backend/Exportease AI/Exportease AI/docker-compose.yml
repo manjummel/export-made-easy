@@ -1,0 +1,77 @@
+# ============================================================
+# ExportEase AI - Docker Compose (Development)
+# EXPORT-EASE-BACKEND-V1
+# ============================================================
+# Starts System 3 (Backend) + PostgreSQL.
+# System 1 (AI Engine) and System 2 (Knowledge) connect via env vars.
+# Set REAL_SERVICES=true and update *_SERVICE_URL to connect real services.
+
+version: "3.9"
+
+services:
+
+  # ── PostgreSQL Database ──────────────────────────────────────
+  postgres:
+    image: postgres:15-alpine
+    container_name: exportease_db
+    environment:
+      POSTGRES_USER: exportease
+      POSTGRES_PASSWORD: exportease_dev
+      POSTGRES_DB: exportease_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U exportease -d exportease_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - exportease_net
+
+  # ── System 3: Backend (Business Orchestrator) ────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: exportease_backend
+    env_file:
+      - .env
+    environment:
+      # Override DB URL for Docker networking
+      DATABASE_URL: postgresql+asyncpg://exportease:exportease_dev@postgres:5432/exportease_db
+      DATABASE_SYNC_URL: postgresql+psycopg2://exportease:exportease_dev@postgres:5432/exportease_db
+      # AI Engine (System 1) — update if running on separate service
+      AI_SERVICE_URL: ${AI_SERVICE_URL:-http://host.docker.internal:8001}
+      # Knowledge Service (System 2) — update if running on separate service
+      KNOWLEDGE_SERVICE_URL: ${KNOWLEDGE_SERVICE_URL:-http://host.docker.internal:8002}
+      # Service Mode
+      MOCK_SERVICES: ${MOCK_SERVICES:-true}
+      REAL_SERVICES: ${REAL_SERVICES:-false}
+      # CORS — allow the frontend
+      CORS_ORIGINS: "http://localhost:3000,http://localhost:5173"
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    networks:
+      - exportease_net
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  exportease_net:
+    driver: bridge
