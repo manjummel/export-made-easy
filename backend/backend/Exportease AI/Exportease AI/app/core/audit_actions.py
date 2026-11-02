@@ -1,0 +1,38 @@
+# ============================================================
+# ExportEase AI - Audit Action Constants (Prompt 3.19)
+# EXPORT-EASE-BACKEND-V1
+# ============================================================
+
+class AuditAction:
+    # Auth
+    USER_LOGIN          = "USER_LOGIN"
+    USER_LOGOUT         = "USER_LOGOUT"
+    USER_REGISTER       = "USER_REGISTER"
+    PASSWORD_CHANGE     = "PASSWORD_CHANGE"
+    
+    # Projects
+    PROJECT_CREATED     = "PROJECT_CREATED"
+    PROJECT_UPDATED     = "PROJECT_UPDATED"
+    PROJECT_DELETED     = "PROJECT_DELETED"
+    
+    # AI Engines
+    COMPLIANCE_ANALYZED     = "COMPLIANCE_ANALYZED"
+    DOCUMENTS_ANALYZED      = "DOCUMENTS_ANALYZED"
+    CERTIFICATION_ANALYZED  = "CERTIFICATION_ANALYZED"
+    MARKET_ANALYZED         = "MARKET_ANALYZED"
+    RISK_ANALYZED           = "RISK_ANALYZED"
+    EXPORT_PLAN_GENERATED   = "EXPORT_PLAN_GENERATED"
+    
+    # Documents
+    DOCUMENT_UPLOADED   = "DOCUMENT_UPLOADED"
+    DOCUMENT_VERIFIED   = "DOCUMENT_VERIFIED"
+    DOCUMENT_COMPLETED  = "DOCUMENT_COMPLETED"
+    
+    # Admin
+    ADMIN_ACTION        = "ADMIN_ACTION"
+    USER_ROLE_CHANGED   = "USER_ROLE_CHANGED"
+    
+    # AI / WebSocket
+    AGENT_RUN_STARTED   = "AGENT_RUN_STARTED"
+    AGENT_RUN_COMPLETED = "AGENT_RUN_COMPLETED"
+    AGENT_RUN_FAILED    = "AGENT_RUN_FAILED"
