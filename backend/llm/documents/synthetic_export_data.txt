@@ -1,0 +1,32 @@
+Export Compliance and Procedures Guide (Synthetic Data)
+
+1. General Export Rules:
+All goods exported from the jurisdiction must be accompanied by a commercial invoice, a packing list, and a certificate of origin.
+Exports exceeding a value of $2,500 require an Electronic Export Information (EEI) filing.
+
+2. HS Codes (Harmonized System Codes):
+- Laptops and portable computers: HS Code 8471.30
+- Smartphones and mobile devices: HS Code 8517.12
+- Software and digital downloads: Not subject to standard HS codes, but require ECCN classification.
+- Synthetic Textiles: HS Code 5407.52
+- Industrial Machinery: HS Code 8479.89
+
+3. Restricted Destinations:
+Exports to embargoed countries (e.g., Country X, Country Y) are strictly prohibited without a specific license from the Office of Export Compliance.
+
+4. Synthetic Data Export Policies:
+When exporting synthetic data (data generated artificially for testing or research), the following rules apply:
+- Synthetic data containing no personally identifiable information (PII) can be exported freely under License Exception NLR (No License Required).
+- If the synthetic data is used to train AI models for military applications, it falls under ECCN 0A987 and requires a specialized export license.
+- Synthetic datasets exceeding 1TB in size must be reported to the Data Export Bureau within 30 days of transfer.
+
+5. Document Generation Requirements:
+When creating export documentation via ExportEase AI, ensure that the final destination, consignee, and end-user are clearly stated.
+The system automatically assigns an internal reference number to each shipment.
+
+6. Frequently Asked Questions:
+Q: What is the HS code for a laptop?
+A: The HS code for laptops and portable computers is 8471.30.
+
+Q: Do I need a license to export synthetic data?
+A: Generally, no license is required (NLR) for synthetic data without PII. However, if intended for military AI models, a license under ECCN 0A987 is required.

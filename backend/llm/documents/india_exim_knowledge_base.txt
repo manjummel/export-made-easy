@@ -1,0 +1,283 @@
+ExportEase AI — India EXIM Knowledge Base (RAG Reference Document)
+Last Updated: 2026 | Sources: DGFT, CBIC, ICEGATE, RBI, APEDA, FIEO, UN Comtrade
+
+=============================================================
+1. FOREIGN TRADE POLICY (FTP) 2023-2028
+=============================================================
+The Foreign Trade Policy (FTP) 2023-28 was notified by the Ministry of Commerce and Industry on April 1, 2023. The policy is aimed at raising India's goods and services exports to USD 2 trillion by 2030.
+
+Key Schemes:
+- RoDTEP (Remission of Duties and Taxes on Exported Products): Provides rebate of central, state, and local duties/taxes/levies on exports at 0.5% to 4.3% of FOB value depending on product category.
+- RoSCTL (Rebate of State and Central Taxes and Levies): Applicable for textile and apparel exporters.
+- EPCG (Export Promotion Capital Goods Scheme): Allows import of capital goods at 0% customs duty for export production with an export obligation of 6x the duty saved.
+- Advance Authorisation: Allows duty-free import of inputs for export production.
+- Star Export House: Recognition scheme rewarding high-volume exporters (1-star to 5-star status).
+
+Export Obligation: Exporters under Advance Authorisation or EPCG must fulfil export obligations within stipulated timeframes, typically 18-24 months.
+
+=============================================================
+2. HS CODE CLASSIFICATION (ITC-HS 2026)
+=============================================================
+India follows the ITC-HS (Indian Trade Classification based on Harmonized System) for tariff classification. The schedule is maintained by DGFT and CBIC.
+
+Common Export HS Codes:
+- Chapter 62: Articles of apparel and clothing, not knitted or crocheted
+  - HS 6205.20.00: Men's woven cotton shirts
+  - HS 6204.62.00: Women's trousers and shorts of cotton
+- Chapter 09: Coffee, tea, spices
+  - HS 0910.30.00: Turmeric (Curcuma)
+  - HS 0901.11.00: Coffee, not roasted, not decaffeinated
+- Chapter 84: Nuclear reactors, boilers, machinery
+  - HS 8471.30: Portable computers (laptops)
+- Chapter 27: Mineral fuels, oils
+  - HS 2709.00: Crude petroleum oils
+- Chapter 71: Natural or cultured pearls, precious metals
+  - HS 7113.19.10: Jewellery of gold
+
+Export Restrictions:
+- Items on the Prohibited List cannot be exported under any circumstances
+- Items on the Restricted List require a license from DGFT
+- Freely exportable items (most items) can be exported without a license
+
+=============================================================
+3. INDIA-UAE COMPREHENSIVE ECONOMIC PARTNERSHIP AGREEMENT (CEPA)
+=============================================================
+The India-UAE CEPA came into effect on May 1, 2022. It is India's most significant FTA in recent decades.
+
+Key Benefits:
+- Tariff Elimination: 97% of India's exports to UAE get 0% duty immediately or over 5-10 years
+- Textile and Apparel: Immediate duty elimination on HS Chapter 61 and 62 products (cotton shirts, garments)
+- Rules of Origin (RoO): Products must satisfy 35% Qualifying Value Content (QVC) or undergo substantial transformation to be eligible
+- Certificate of Origin: Form AI Certificate of Origin issued by designated agencies (FIEO, Export Inspection Councils, Chambers of Commerce)
+- Service Sectors: 111 sub-sectors covered including IT, banking, healthcare
+
+Textile Products:
+- Men's cotton shirts (HS 6205.20): 0% duty at UAE ports with valid Form AI COO
+- Women's garments (HS 6204): 0% duty, QVC > 35% from India
+- Home textiles (HS 6302): 0% duty
+
+=============================================================
+4. INDIA-EU GENERALIZED SCHEME OF PREFERENCES (GSP)
+=============================================================
+India exports to EU under the EU GSP scheme providing preferential tariff rates.
+
+Note: As of December 2023, India graduated from EU GSP as a higher-middle income economy. Exporters should verify current tariff rates under MFN (Most Favoured Nation) or check bilateral FTA progress between India and EU.
+
+EU Import Requirements:
+- REACH Regulation: Chemicals must comply with EU REACH (Registration, Evaluation, Authorisation and Restriction of Chemicals)
+- CE Marking: Required for electrical goods, machinery, medical devices
+- EUDR (EU Deforestation Regulation): Effective 2025, affects timber, soy, palm oil, cocoa, coffee, rubber, cattle
+- Food Safety: EU Food Safety Regulations for agricultural products
+
+=============================================================
+5. DGFT — DIRECTORATE GENERAL OF FOREIGN TRADE
+=============================================================
+Website: https://www.dgft.gov.in
+
+Key Functions:
+- Issues IEC (Importer Exporter Code) — mandatory for all import/export activities
+- Notifies Foreign Trade Policy and procedures
+- Issues Advance Authorisation, EPCG, and other export promotion licenses
+- Manages SION (Standard Input Output Norms) for duty-free imports
+- Operates ICEDASH for export data monitoring
+
+IEC (Importer Exporter Code):
+- 10-digit code mandatory for all exporters and importers
+- Applied online at DGFT portal
+- Linked to PAN of proprietor/company
+- No renewal required, valid for lifetime
+
+SION (Standard Input Output Norms):
+- Defines input-output ratios for products under Advance Authorisation
+- Updated regularly by DGFT based on industry inputs
+
+=============================================================
+6. CBIC AND CUSTOMS PROCEDURES
+=============================================================
+Website: https://www.cbic.gov.in
+
+Customs Duty:
+- Basic Customs Duty (BCD): Standard import tariff
+- Integrated GST (IGST): Applied on imports, creditable against GST liability
+- Social Welfare Surcharge (SWS): 10% on BCD
+- Anti-Dumping Duty (ADD): Applied on specific products to prevent dumping
+
+Export Customs Procedure:
+1. Registration: Obtain IEC from DGFT
+2. Shipping Bill: File electronically through ICEGATE (Indian Customs EDI Gateway)
+3. Examination: Customs may examine goods physically or through scanning
+4. Let Export Order: Customs issues LEO (Let Export Order) after verification
+5. Export General Manifest (EGM): Filed by shipping line/airline after departure
+
+Green Channel: Low-risk exporters get automated clearance without physical examination.
+
+Duty Drawback:
+- Refund of customs duty paid on imported inputs used in export production
+- All Industry Rate (AIR) or Brand Rate drawback available
+- Applied through ICEGATE customs portal
+
+=============================================================
+7. ICEGATE — INDIAN CUSTOMS ELECTRONIC GATEWAY
+=============================================================
+Website: https://www.icegate.gov.in
+
+Services:
+- Online filing of Shipping Bills for export
+- Filing of Bills of Entry for import
+- Payment of customs duty online
+- e-Sanchit: Paperless document submission for customs clearance
+- Risk Management System (RMS): Automated risk profiling for cargo
+
+Shipping Bill:
+- Electronic document filed by exporter/CHA before export
+- Contains: exporter details, buyer details, product description, HS code, quantity, value
+- Types: Free Shipping Bill, Drawback Shipping Bill, DEEC Shipping Bill
+
+=============================================================
+8. RBI — FOREIGN EXCHANGE MANAGEMENT (FEMA)
+=============================================================
+Website: https://www.rbi.org.in
+
+Export Realisation:
+- Full export proceeds must be realised within 9 months from date of export (extended from 180 days)
+- Exports to countries not listed in SWIFT can use alternative payment methods
+- EDPMS (Export Data Processing and Monitoring System): RBI system tracking export bill realisations
+
+Forward Contracts:
+- Exporters can book forward contracts to hedge against forex risk
+- Available for up to 12 months
+- Rollover permitted with proper documentation
+
+Export Finance:
+- PCFC (Pre-Shipment Credit in Foreign Currency): Low interest rate export finance from banks
+- PSCF (Post-Shipment Credit in Foreign Currency): Finance against export documents
+- ECGC (Export Credit Guarantee Corporation): Insurance against buyer default risk
+
+=============================================================
+9. APEDA — AGRICULTURAL AND PROCESSED FOOD PRODUCTS EXPORT DEVELOPMENT AUTHORITY
+=============================================================
+Website: https://www.apeda.gov.in
+
+Mandated Products:
+- Fruits and vegetables, floriculture
+- Meat and meat products
+- Poultry and dairy products
+- Cereals and processed foods
+- Spices (shared mandate with Spices Board)
+
+Registration:
+- All exporters of APEDA mandated products must register with APEDA
+- APEDA registration valid for 5 years
+
+Quality Standards:
+- EIC (Export Inspection Council) certification for food safety
+- HACCP, ISO 22000 certification requirements for EU/US exports
+- Residue Monitoring Plan (RMP) compliance required for export to EU
+
+=============================================================
+10. RISK MANAGEMENT FOR EXPORTERS
+=============================================================
+
+Foreign Exchange Risk:
+- USD/INR and EUR/INR are primary currency pairs for Indian exports
+- Forward contract hedge recommended for receivables > $50,000
+- Options contracts available for higher flexibility
+- Natural hedge: Match USD receivables with USD payables
+
+Credit Risk:
+- ECGC Policy: Insurance against buyer default
+- Letter of Credit (LC): Preferred payment instrument for high-value exports
+- Document Against Payment (DP): Suitable for trusted buyers
+- Open Account: High risk, only for long-standing relationships
+
+Country Risk:
+- ECGC Country Risk Classification: A1 to C3 ratings
+- Avoid Open Account terms with C2/C3 rated countries
+- Consult ECGC for country-specific limits
+
+Compliance Risk:
+- Denied Party Screening: Check against US BIS, OFAC, EU Sanctions lists
+- Import prohibitions: Verify if product is banned/restricted in destination country
+- Labelling requirements: Country-specific label language requirements
+
+=============================================================
+11. LOGISTICS AND SHIPPING
+=============================================================
+
+Major Indian Export Ports:
+- JNPT (Jawaharlal Nehru Port Trust), Navi Mumbai: Largest container port
+- Mundra Port, Gujarat: Private container port
+- Chennai Port: South India hub
+- Vizag Port (VCTPL): Bulk and container
+- Kolkata/Haldia: Eastern India
+
+Air Cargo:
+- IGI Airport, Delhi: Major air cargo hub
+- CSIA, Mumbai: Second largest air cargo hub
+- Deferred rates available for non-perishable cargo
+
+Incoterms 2020:
+- FOB (Free on Board): Seller delivers at port of export
+- CIF (Cost Insurance Freight): Seller responsible until destination port
+- DDP (Delivered Duty Paid): Seller responsible for all costs including import duty
+- EXW (Ex Works): Buyer takes all responsibility from seller's premises
+
+Freight Forwarders:
+- CHA (Custom House Agent): Licensed by Customs to file shipping documents
+- NVOCC (Non-Vessel Operating Common Carrier): Consolidates shipments
+
+=============================================================
+12. PAYMENT TERMS AND DOCUMENTATION
+=============================================================
+
+Export Documents:
+1. Commercial Invoice: Details of goods, value, terms
+2. Packing List: Detailed packing information
+3. Bill of Lading (BL): Receipt from shipping company
+4. Certificate of Origin: Proves goods originate from India
+5. Shipping Bill: Customs clearance document
+6. Letter of Credit: Bank guarantee of payment
+7. GATT Declaration: Buyer's confirmation of end use
+
+Additional Documents (as required):
+- Phytosanitary Certificate: For agricultural products (issued by Plant Quarantine)
+- Health Certificate: For food products (issued by EIC/APEDA)
+- Fumigation Certificate: Pest treatment certificate
+- Quality Inspection Certificate: Third-party quality verification
+- Weight Certificate: For bulk commodities
+
+=============================================================
+13. GOVERNMENT SCHEMES AND INCENTIVES
+=============================================================
+
+MSME Export Support:
+- Market Development Assistance (MDA): Financial support for trade fair participation
+- Market Access Initiative (MAI): Project-based export promotion
+- TIES (Trade Infrastructure for Export Scheme): Infrastructure grants
+
+Financial Support:
+- Interest Equalisation Scheme: Subsidised export credit for MSMEs
+- SIDBI Export Finance: Dedicated MSME export financing
+- EXIM Bank: Long-term export finance and buyer's credit
+
+Technology:
+- Common Service Centres: Digital export documentation support
+- GeM (Government e-Marketplace): B2G export opportunities
+- India Trade Portal (https://www.indiantradeportal.in): One-stop trade information
+
+=============================================================
+14. COMPLIANCE AGENCIES AND CONTACTS
+=============================================================
+
+DGFT: https://www.dgft.gov.in | Helpline: 1800-111-550
+CBIC: https://www.cbic.gov.in
+ICEGATE: https://www.icegate.gov.in | Support: 1800-3010-1000
+RBI: https://www.rbi.org.in
+APEDA: https://www.apeda.gov.in | Email: apeda@apeda.gov.in
+FIEO: https://www.fieo.org | Helpline: 011-26162188
+ECGC: https://www.ecgc.in
+Spices Board: https://www.indianspices.com
+Textile Commissioner: https://www.txcindia.gov.in
+EIC: https://www.eicindia.gov.in
+
+This document provides general guidance. Always verify current regulations with the respective authorities before making export decisions.
