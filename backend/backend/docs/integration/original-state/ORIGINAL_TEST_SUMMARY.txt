@@ -1,0 +1,1365 @@
+=== Running Set 1 (AI Engine) tests in exportease\exportease ===
+Return code: 1
+--- stdout ---
+============================= test session starts =============================
+platform win32 -- Python 3.13.14, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\sreeh\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\python.exe
+cachedir: .pytest_cache
+rootdir: c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease
+configfile: pyproject.toml
+plugins: anyio-4.13.0, Faker-26.0.0, langsmith-0.10.9
+collecting ... collected 101 items
+
+ai_engine/tests/test_agents.py::test_mock_llm_returns_string PASSED      [  0%]
+ai_engine/tests/test_agents.py::test_mock_llm_structured_product PASSED  [  1%]
+ai_engine/tests/test_agents.py::test_mock_llm_structured_hs PASSED       [  2%]
+ai_engine/tests/test_agents.py::test_inference_engine_mock PASSED        [  3%]
+ai_engine/tests/test_agents.py::test_product_agent_runs FAILED           [  4%]
+ai_engine/tests/test_agents.py::test_product_agent_emits_events FAILED   [  5%]
+ai_engine/tests/test_agents.py::test_hs_agent_runs FAILED                [  6%]
+ai_engine/tests/test_agents.py::test_compliance_agent_runs FAILED        [  7%]
+ai_engine/tests/test_agents.py::test_request_id_preserved_through_agents FAILED [  8%]
+ai_engine/tests/test_agents.py::test_agent_run_id_preserved FAILED       [  9%]
+ai_engine/tests/test_agents.py::test_project_id_preserved FAILED         [ 10%]
+ai_engine/tests/test_api.py::test_health_returns_200 PASSED              [ 11%]
+ai_engine/tests/test_api.py::test_version_endpoint PASSED                [ 12%]
+ai_engine/tests/test_api.py::test_api_version_endpoint PASSED            [ 13%]
+ai_engine/tests/test_api.py::test_model_status_endpoint PASSED           [ 14%]
+ai_engine/tests/test_api.py::test_tokenizer_status_endpoint PASSED       [ 15%]
+ai_engine/tests/test_api.py::test_ready_endpoint PASSED                  [ 16%]
+ai_engine/tests/test_api.py::test_evaluation_status_endpoint PASSED      [ 17%]
+ai_engine/tests/test_api.py::test_analyze_turmeric_germany PASSED        [ 18%]
+ai_engine/tests/test_api.py::test_analyze_preserves_request_id PASSED    [ 19%]
+ai_engine/tests/test_api.py::test_analyze_preserves_project_id PASSED    [ 20%]
+ai_engine/tests/test_api.py::test_analyze_has_agent_events PASSED        [ 21%]
+ai_engine/tests/test_api.py::test_analyze_stream_endpoint PASSED         [ 22%]
+ai_engine/tests/test_api.py::test_analyze_has_all_agent_outputs PASSED   [ 23%]
+ai_engine/tests/test_api.py::test_classify_endpoint PASSED               [ 24%]
+ai_engine/tests/test_api.py::test_compliance_endpoint PASSED             [ 25%]
+ai_engine/tests/test_api.py::test_documents_endpoint PASSED              [ 26%]
+ai_engine/tests/test_api.py::test_certifications_endpoint PASSED         [ 27%]
+ai_engine/tests/test_api.py::test_market_endpoint PASSED                 [ 28%]
+ai_engine/tests/test_api.py::test_risk_endpoint PASSED                   [ 29%]
+ai_engine/tests/test_api.py::test_export_plan_endpoint PASSED            [ 30%]
+ai_engine/tests/test_api.py::test_response_envelope_has_all_required_fields PASSED [ 31%]
+ai_engine/tests/test_clients.py::test_mock_knowledge_is_mock FAILED      [ 32%]
+ai_engine/tests/test_clients.py::test_mock_knowledge_connectivity FAILED [ 33%]
+ai_engine/tests/test_clients.py::test_mock_knowledge_retrieve_returns_results FAILED [ 34%]
+ai_engine/tests/test_clients.py::test_mock_knowledge_retrieve_all_verified FAILED [ 35%]
+ai_engine/tests/test_clients.py::test_mock_knowledge_retrieve_with_filters FAILED [ 36%]
+ai_engine/tests/test_clients.py::test_mock_knowledge_get_evidence FAILED [ 37%]
+ai_engine/tests/test_clients.py::test_mock_knowledge_get_citations FAILED [ 38%]
+ai_engine/tests/test_clients.py::test_mock_knowledge_get_confidence FAILED [ 39%]
+ai_engine/tests/test_clients.py::test_mock_backend_is_mock FAILED        [ 40%]
+ai_engine/tests/test_clients.py::test_mock_backend_connectivity FAILED   [ 41%]
+ai_engine/tests/test_clients.py::test_mock_backend_push_event FAILED     [ 42%]
+ai_engine/tests/test_clients.py::test_mock_backend_records_events FAILED [ 43%]
+ai_engine/tests/test_clients.py::test_mock_backend_notify_complete FAILED [ 44%]
+ai_engine/tests/test_clients.py::test_grounding_checker_sufficient PASSED [ 45%]
+ai_engine/tests/test_clients.py::test_grounding_checker_no_results PASSED [ 46%]
+ai_engine/tests/test_clients.py::test_confidence_evaluator_thresholds PASSED [ 47%]
+ai_engine/tests/test_clients.py::test_confidence_aggregate PASSED        [ 48%]
+ai_engine/tests/test_contracts.py::test_contracts_directory_exists PASSED [ 49%]
+ai_engine/tests/test_contracts.py::test_contracts_version_file_exists PASSED [ 50%]
+ai_engine/tests/test_contracts.py::test_contracts_v1_directory_exists PASSED [ 51%]
+ai_engine/tests/test_contracts.py::test_contract_file_exists[identifiers.json] PASSED [ 52%]
+ai_engine/tests/test_contracts.py::test_contract_file_exists[request_envelope.json] PASSED [ 53%]
+ai_engine/tests/test_contracts.py::test_contract_file_exists[response_envelope.json] PASSED [ 54%]
+ai_engine/tests/test_contracts.py::test_contract_file_exists[agent_trace.json] PASSED [ 55%]
+ai_engine/tests/test_contracts.py::test_contract_file_exists[knowledge_result.json] PASSED [ 56%]
+ai_engine/tests/test_contracts.py::test_contract_file_exists[event_types.json] PASSED [ 57%]
+ai_engine/tests/test_contracts.py::test_contract_file_is_valid_json[identifiers.json] PASSED [ 58%]
+ai_engine/tests/test_contracts.py::test_contract_file_is_valid_json[request_envelope.json] PASSED [ 59%]
+ai_engine/tests/test_contracts.py::test_contract_file_is_valid_json[response_envelope.json] PASSED [ 60%]
+ai_engine/tests/test_contracts.py::test_contract_file_is_valid_json[agent_trace.json] PASSED [ 61%]
+ai_engine/tests/test_contracts.py::test_contract_file_is_valid_json[knowledge_result.json] PASSED [ 62%]
+ai_engine/tests/test_contracts.py::test_contract_file_is_valid_json[event_types.json] PASSED [ 63%]
+ai_engine/tests/test_contracts.py::test_contract_loader_loads_all_files PASSED [ 64%]
+ai_engine/tests/test_contracts.py::test_contract_loader_returns_correct_keys PASSED [ 65%]
+ai_engine/tests/test_contracts.py::test_contract_get_by_name PASSED      [ 66%]
+ai_engine/tests/test_contracts.py::test_request_envelope_fields_match_contract PASSED [ 67%]
+ai_engine/tests/test_contracts.py::test_response_envelope_fields_match_contract PASSED [ 68%]
+ai_engine/tests/test_contracts.py::test_agent_event_fields_match_contract PASSED [ 69%]
+ai_engine/tests/test_contracts.py::test_knowledge_result_fields_match_contract PASSED [ 70%]
+ai_engine/tests/test_contracts.py::test_event_type_enum_matches_contract PASSED [ 71%]
+ai_engine/tests/test_e2e.py::test_e2e_request_id_preserved FAILED        [ 72%]
+ai_engine/tests/test_e2e.py::test_e2e_project_id_preserved FAILED        [ 73%]
+ai_engine/tests/test_e2e.py::test_e2e_agent_run_id_preserved FAILED      [ 74%]
+ai_engine/tests/test_e2e.py::test_e2e_all_8_agents_ran FAILED            [ 75%]
+ai_engine/tests/test_e2e.py::test_e2e_confidence_present FAILED          [ 76%]
+ai_engine/tests/test_e2e.py::test_e2e_sources_present FAILED             [ 77%]
+ai_engine/tests/test_e2e.py::test_e2e_agent_events_emitted FAILED        [ 78%]
+ai_engine/tests/test_e2e.py::test_e2e_events_have_required_fields FAILED [ 79%]
+ai_engine/tests/test_e2e.py::test_e2e_hs_code_is_turmeric FAILED         [ 80%]
+ai_engine/tests/test_e2e.py::test_e2e_export_plan_has_steps FAILED       [ 81%]
+ai_engine/tests/test_e2e.py::test_e2e_workflow_status_not_error FAILED   [ 82%]
+ai_engine/tests/test_e2e.py::test_e2e_via_api FAILED                     [ 83%]
+ai_engine/tests/test_safety.py::test_adversarial_patterns PASSED         [ 84%]
+ai_engine/tests/test_safety.py::test_grounding_policy_mapping PASSED     [ 85%]
+ai_engine/tests/test_safety.py::test_output_validator PASSED             [ 86%]
+ai_engine/tests/test_schemas.py::test_request_envelope_defaults PASSED   [ 87%]
+ai_engine/tests/test_schemas.py::test_request_envelope_with_all_fields PASSED [ 88%]
+ai_engine/tests/test_schemas.py::test_request_envelope_extra_fields_allowed PASSED [ 89%]
+ai_engine/tests/test_schemas.py::test_response_envelope_success_factory PASSED [ 90%]
+ai_engine/tests/test_schemas.py::test_response_envelope_insufficient_grounding_factory PASSED [ 91%]
+ai_engine/tests/test_schemas.py::test_response_envelope_error_factory PASSED [ 92%]
+ai_engine/tests/test_schemas.py::test_confidence_clamped PASSED          [ 93%]
+ai_engine/tests/test_schemas.py::test_agent_event_started_factory PASSED [ 94%]
+ai_engine/tests/test_schemas.py::test_agent_event_completed_factory PASSED [ 95%]
+ai_engine/tests/test_schemas.py::test_agent_event_failed_factory PASSED  [ 96%]
+ai_engine/tests/test_schemas.py::test_all_event_types_instantiable PASSED [ 97%]
+ai_engine/tests/test_schemas.py::test_knowledge_result_verified PASSED   [ 98%]
+ai_engine/tests/test_schemas.py::test_knowledge_result_unverified PASSED [ 99%]
+ai_engine/tests/test_schemas.py::test_knowledge_result_score_bounds PASSED [100%]
+
+================================== FAILURES ===================================
+___________________________ test_product_agent_runs ___________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+----------------------------- Captured log setup ------------------------------
+WARNING  ai_engine.model.mock_model:mock_model.py:28 MockLLM active — CPU_ONLY_MODE=true. Real model (Qwen2.5-1.5B-Instruct) will NOT be used.
+_______________________ test_product_agent_emits_events _______________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+----------------------------- Captured log setup ------------------------------
+WARNING  ai_engine.model.mock_model:mock_model.py:28 MockLLM active — CPU_ONLY_MODE=true. Real model (Qwen2.5-1.5B-Instruct) will NOT be used.
+_____________________________ test_hs_agent_runs ______________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+----------------------------- Captured log setup ------------------------------
+WARNING  ai_engine.model.mock_model:mock_model.py:28 MockLLM active — CPU_ONLY_MODE=true. Real model (Qwen2.5-1.5B-Instruct) will NOT be used.
+_________________________ test_compliance_agent_runs __________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+----------------------------- Captured log setup ------------------------------
+WARNING  ai_engine.model.mock_model:mock_model.py:28 MockLLM active — CPU_ONLY_MODE=true. Real model (Qwen2.5-1.5B-Instruct) will NOT be used.
+__________________ test_request_id_preserved_through_agents ___________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+----------------------------- Captured log setup ------------------------------
+WARNING  ai_engine.model.mock_model:mock_model.py:28 MockLLM active — CPU_ONLY_MODE=true. Real model (Qwen2.5-1.5B-Instruct) will NOT be used.
+_________________________ test_agent_run_id_preserved _________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+----------------------------- Captured log setup ------------------------------
+WARNING  ai_engine.model.mock_model:mock_model.py:28 MockLLM active — CPU_ONLY_MODE=true. Real model (Qwen2.5-1.5B-Instruct) will NOT be used.
+__________________________ test_project_id_preserved __________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+----------------------------- Captured log setup ------------------------------
+WARNING  ai_engine.model.mock_model:mock_model.py:28 MockLLM active — CPU_ONLY_MODE=true. Real model (Qwen2.5-1.5B-Instruct) will NOT be used.
+_________________________ test_mock_knowledge_is_mock _________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+______________________ test_mock_knowledge_connectivity _______________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+________________ test_mock_knowledge_retrieve_returns_results _________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+__________________ test_mock_knowledge_retrieve_all_verified __________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+__________________ test_mock_knowledge_retrieve_with_filters __________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+______________________ test_mock_knowledge_get_evidence _______________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+______________________ test_mock_knowledge_get_citations ______________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+_____________________ test_mock_knowledge_get_confidence ______________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+__________________________ test_mock_backend_is_mock __________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+_______________________ test_mock_backend_connectivity ________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+________________________ test_mock_backend_push_event _________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+______________________ test_mock_backend_records_events _______________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+______________________ test_mock_backend_notify_complete ______________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+________________________ test_e2e_request_id_preserved ________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+----------------------------- Captured log setup ------------------------------
+WARNING  ai_engine.model.mock_model:mock_model.py:28 MockLLM active — CPU_ONLY_MODE=true. Real model (Qwen2.5-1.5B-Instruct) will NOT be used.
+________________________ test_e2e_project_id_preserved ________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+_______________________ test_e2e_agent_run_id_preserved _______________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+__________________________ test_e2e_all_8_agents_ran __________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+_________________________ test_e2e_confidence_present _________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+__________________________ test_e2e_sources_present ___________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+________________________ test_e2e_agent_events_emitted ________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+____________________ test_e2e_events_have_required_fields _____________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+________________________ test_e2e_hs_code_is_turmeric _________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+_______________________ test_e2e_export_plan_has_steps ________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+_____________________ test_e2e_workflow_status_not_error ______________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+______________________________ test_e2e_via_api _______________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+============================== warnings summary ===============================
+..\..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\config\__init__.py:1428
+  C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\config\__init__.py:1428: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+ai_engine\tests\test_agents.py:97
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_agents.py:97: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_agents.py:106
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_agents.py:106: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_agents.py:120
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_agents.py:120: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_agents.py:134
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_agents.py:134: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_agents.py:150
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_agents.py:150: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_agents.py:165
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_agents.py:165: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_agents.py:181
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_agents.py:181: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+..\..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\formparsers.py:12
+  C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\formparsers.py:12: PendingDeprecationWarning: Please use `import python_multipart` instead.
+    import multipart
+
+ai_engine\tests\test_clients.py:31
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_clients.py:31: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_clients.py:36
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_clients.py:36: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_clients.py:42
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_clients.py:42: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_clients.py:54
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_clients.py:54: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_clients.py:63
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_clients.py:63: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_clients.py:73
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_clients.py:73: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_clients.py:81
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_clients.py:81: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_clients.py:92
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_clients.py:92: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_clients.py:109
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_clients.py:109: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_clients.py:114
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_clients.py:114: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_clients.py:120
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_clients.py:120: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_clients.py:133
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_clients.py:133: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_clients.py:149
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_clients.py:149: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_e2e.py:83
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_e2e.py:83: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_e2e.py:95
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_e2e.py:95: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_e2e.py:107
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_e2e.py:107: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_e2e.py:127
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_e2e.py:127: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_e2e.py:147
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_e2e.py:147: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_e2e.py:159
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_e2e.py:159: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_e2e.py:176
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_e2e.py:176: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_e2e.py:192
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_e2e.py:192: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_e2e.py:212
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_e2e.py:212: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_e2e.py:224
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_e2e.py:224: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_e2e.py:237
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_e2e.py:237: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine\tests\test_e2e.py:249
+  c:\Users\sreeh\OneDrive\Desktop\Zip folder\exportease\exportease\ai_engine\tests\test_e2e.py:249: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+ai_engine/tests/test_api.py::test_health_returns_200
+  C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\pydantic\_internal\_fields.py:132: UserWarning: Field "model_name" in Settings has conflict with protected namespace "model_".
+  
+  You may be able to resolve this warning by setting `model_config['protected_namespaces'] = ('settings_',)`.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED ai_engine/tests/test_agents.py::test_product_agent_runs - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_agents.py::test_product_agent_emits_events - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_agents.py::test_hs_agent_runs - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_agents.py::test_compliance_agent_runs - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_agents.py::test_request_id_preserved_through_agents - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_agents.py::test_agent_run_id_preserved - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_agents.py::test_project_id_preserved - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_clients.py::test_mock_knowledge_is_mock - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_clients.py::test_mock_knowledge_connectivity - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_clients.py::test_mock_knowledge_retrieve_returns_results - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_clients.py::test_mock_knowledge_retrieve_all_verified - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_clients.py::test_mock_knowledge_retrieve_with_filters - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_clients.py::test_mock_knowledge_get_evidence - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_clients.py::test_mock_knowledge_get_citations - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_clients.py::test_mock_knowledge_get_confidence - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_clients.py::test_mock_backend_is_mock - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_clients.py::test_mock_backend_connectivity - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_clients.py::test_mock_backend_push_event - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_clients.py::test_mock_backend_records_events - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_clients.py::test_mock_backend_notify_complete - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_e2e.py::test_e2e_request_id_preserved - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_e2e.py::test_e2e_project_id_preserved - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_e2e.py::test_e2e_agent_run_id_preserved - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_e2e.py::test_e2e_all_8_agents_ran - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_e2e.py::test_e2e_confidence_present - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_e2e.py::test_e2e_sources_present - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_e2e.py::test_e2e_agent_events_emitted - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_e2e.py::test_e2e_events_have_required_fields - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_e2e.py::test_e2e_hs_code_is_turmeric - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_e2e.py::test_e2e_export_plan_has_steps - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_e2e.py::test_e2e_workflow_status_not_error - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED ai_engine/tests/test_e2e.py::test_e2e_via_api - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+================= 32 failed, 69 passed, 35 warnings in 5.65s ==================
+
+--- stderr ---
+
+
+================================================================================
+
+=== Running Set 2 (Knowledge/RAG) tests in ExportEase Dataset\ExportEase Dataset\system2 ===
+Return code: 2
+--- stdout ---
+============================= test session starts =============================
+platform win32 -- Python 3.13.14, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\sreeh\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\python.exe
+cachedir: .pytest_cache
+rootdir: c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-26.0.0, langsmith-0.10.9
+collecting ... collected 17 items / 20 errors
+
+=================================== ERRORS ====================================
+__________ ERROR collecting tests/contract/test_contract_chunking.py __________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_chunking.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_chunking.py:10: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+_________ ERROR collecting tests/contract/test_contract_citations.py __________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_citations.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_citations.py:10: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+_________ ERROR collecting tests/contract/test_contract_confidence.py _________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_confidence.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_confidence.py:9: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+______ ERROR collecting tests/contract/test_contract_dense_retrieval.py _______
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_dense_retrieval.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_dense_retrieval.py:12: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+_________ ERROR collecting tests/contract/test_contract_documents.py __________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_documents.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_documents.py:9: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+_________ ERROR collecting tests/contract/test_contract_embedding.py __________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_embedding.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_embedding.py:10: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+___________ ERROR collecting tests/contract/test_contract_health.py ___________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_health.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_health.py:13: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+___________ ERROR collecting tests/contract/test_contract_hybrid.py ___________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_hybrid.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_hybrid.py:10: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+___________ ERROR collecting tests/contract/test_contract_ingest.py ___________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_ingest.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_ingest.py:15: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+_________ ERROR collecting tests/contract/test_contract_integrity.py __________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_integrity.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_integrity.py:9: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+_______ ERROR collecting tests/contract/test_contract_normalization.py ________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_normalization.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_normalization.py:9: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+_____ ERROR collecting tests/contract/test_contract_qdrant_abstraction.py _____
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_qdrant_abstraction.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_qdrant_abstraction.py:10: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+___________ ERROR collecting tests/contract/test_contract_query.py ____________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_query.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_query.py:13: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+__________ ERROR collecting tests/contract/test_contract_records.py ___________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_records.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_records.py:9: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+__________ ERROR collecting tests/contract/test_contract_sources.py ___________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_sources.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_sources.py:9: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+___________ ERROR collecting tests/contract/test_contract_status.py ___________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_status.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_status.py:10: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+__________ ERROR collecting tests/contract/test_contract_training.py __________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_training.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_training.py:10: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+________ ERROR collecting tests/contract/test_contract_verification.py ________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_verification.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_verification.py:10: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+_________ ERROR collecting tests/contract/test_contract_versioning.py _________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\contract\test_contract_versioning.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\contract\test_contract_versioning.py:10: in <module>
+    from app.main import create_app
+app\main.py:21: in <module>
+    import structlog
+E   ModuleNotFoundError: No module named 'structlog'
+___________ ERROR collecting tests/integration/test_connectivity.py ___________
+ImportError while importing test module 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\tests\integration\test_connectivity.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1395: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\integration\test_connectivity.py:12: in <module>
+    from rag.integration.service_registry import ServiceEntry, ServiceRegistry, ServiceStatus
+rag\integration\__init__.py:9: in <module>
+    from rag.integration.contract_loader import ContractLoader, get_contract
+rag\integration\contract_loader.py:28: in <module>
+    from openapi_spec_validator import validate
+E   ModuleNotFoundError: No module named 'openapi_spec_validator'
+============================== warnings summary ===============================
+..\..\..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\config\__init__.py:1428
+  C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\config\__init__.py:1428: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+..\..\..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\cacheprovider.py:475
+  C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\_pytest\cacheprovider.py:475: PytestCacheWarning: could not create cache path c:\Users\sreeh\OneDrive\Desktop\Zip folder\ExportEase Dataset\ExportEase Dataset\system2\.pytest_cache\v\cache\nodeids: [WinError 5] Access is denied: 'c:\\Users\\sreeh\\OneDrive\\Desktop\\Zip folder\\ExportEase Dataset\\ExportEase Dataset\\system2\\pytest-cache-files-2a1_44ta' -> 'c:\\Users\\sreeh\\OneDrive\\Desktop\\Zip folder\\ExportEase Dataset\\ExportEase Dataset\\system2\\.pytest_cache'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+ERROR tests/contract/test_contract_chunking.py
+ERROR tests/contract/test_contract_citations.py
+ERROR tests/contract/test_contract_confidence.py
+ERROR tests/contract/test_contract_dense_retrieval.py
+ERROR tests/contract/test_contract_documents.py
+ERROR tests/contract/test_contract_embedding.py
+ERROR tests/contract/test_contract_health.py
+ERROR tests/contract/test_contract_hybrid.py
+ERROR tests/contract/test_contract_ingest.py
+ERROR tests/contract/test_contract_integrity.py
+ERROR tests/contract/test_contract_normalization.py
+ERROR tests/contract/test_contract_qdrant_abstraction.py
+ERROR tests/contract/test_contract_query.py
+ERROR tests/contract/test_contract_records.py
+ERROR tests/contract/test_contract_sources.py
+ERROR tests/contract/test_contract_status.py
+ERROR tests/contract/test_contract_training.py
+ERROR tests/contract/test_contract_verification.py
+ERROR tests/contract/test_contract_versioning.py
+ERROR tests/integration/test_connectivity.py
+!!!!!!!!!!!!!!!!!! Interrupted: 20 errors during collection !!!!!!!!!!!!!!!!!!!
+======================= 2 warnings, 20 errors in 4.99s ========================
+
+--- stderr ---
+
+
+================================================================================
+
+=== Running Set 3 (Backend) tests in Exportease AI\Exportease AI ===
+Return code: 4
+--- stdout ---
+
+--- stderr ---
+ImportError while loading conftest 'c:\Users\sreeh\OneDrive\Desktop\Zip folder\Exportease AI\Exportease AI\tests\conftest.py'.
+tests\conftest.py:18: in <module>
+    from app.main import app
+app\main.py:31: in <module>
+    from app.database import init_db, close_db
+app\database.py:24: in <module>
+    engine = create_async_engine(
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\sqlalchemy\ext\asyncio\engine.py:120: in create_async_engine
+    sync_engine = _create_engine(url, **kw)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\sqlalchemy\util\deprecations.py:281: in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\sqlalchemy\engine\create.py:617: in create_engine
+    dbapi = dbapi_meth(**dbapi_args)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\sreeh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py:450: in import_dbapi
+    __import__("aiosqlite"), __import__("sqlite3")
+    ^^^^^^^^^^^^^^^^^^^^^^^
+E   ModuleNotFoundError: No module named 'aiosqlite'
+
+
+================================================================================

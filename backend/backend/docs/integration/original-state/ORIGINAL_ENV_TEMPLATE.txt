@@ -1,0 +1,251 @@
+=== Set 1 (AI Engine) (exportease\exportease\.env.example) ===
+# ==============================================================================
+# ExportEase AI Intelligence Engine — Environment Variables
+# Copy this file to .env and fill in your values.
+# NEVER commit .env to version control.
+# ==============================================================================
+
+# --- Service Configuration ---
+AI_SERVICE_PORT=8001
+AI_SERVICE_HOST=0.0.0.0
+
+# --- External Service URLs ---
+KNOWLEDGE_SERVICE_URL=http://localhost:8002
+BACKEND_SERVICE_URL=http://localhost:8000
+
+# --- Contracts ---
+# Path to the local contracts directory (leave blank to use bundled contracts/)
+EXPORTEASE_CONTRACTS_PATH=
+# OR a git URL to pull contracts from (optional)
+EXPORTEASE_CONTRACTS_GIT_URL=
+
+# --- Service Mode ---
+# Set REAL_SERVICES=true when System 2 and System 3 are running
+REAL_SERVICES=false
+MOCK_SERVICES=true
+
+# --- Model Configuration ---
+# Set to true to skip loading the real LLM (no GPU required)
+CPU_ONLY_MODE=true
+# Hugging Face model identifier
+MODEL_NAME=Qwen/Qwen2.5-1.5B-Instruct
+# Path to a QLoRA adapter directory (leave blank if no adapter loaded)
+ADAPTER_PATH=
+# Quantization: 4 or 8 (only applies when CPU_ONLY_MODE=false)
+QUANTIZATION_BITS=4
+# HuggingFace cache directory
+HF_HOME=
+
+# --- Logging ---
+LOG_LEVEL=INFO
+LOG_FORMAT=json
+
+# --- Security ---
+# Secret key for internal service-to-service auth (optional for dev)
+SERVICE_SECRET_KEY=dev-secret-change-in-production
+
+# --- CORS ---
+ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8000
+
+
+==================================================
+
+=== Set 2 (Knowledge/RAG) (ExportEase Dataset\ExportEase Dataset\system2\.env.example) ===
+# ============================================================
+# ExportEase AI — System 2: EXPORT-EASE-KNOWLEDGE-V1
+# Environment Variables Template
+# Copy this file to .env and fill in real values.
+# ============================================================
+
+# ----- Service Identity -----
+SERVICE_NAME=export-ease-knowledge-v1
+SERVICE_VERSION=1.0.0
+KNOWLEDGE_API_VERSION=v1
+
+# ----- Network -----
+KNOWLEDGE_SERVICE_PORT=8100
+KNOWLEDGE_SERVICE_HOST=0.0.0.0
+
+# ----- Contracts -----
+# Local path where the shared API contracts are stored/cloned
+EXPORTEASE_CONTRACTS_PATH=/app/contracts
+# Git URL to fetch contracts if local path is missing or stale
+EXPORTEASE_CONTRACTS_GIT_URL=https://github.com/exportease/contracts.git
+# Branch to clone from
+EXPORTEASE_CONTRACTS_GIT_BRANCH=main
+
+# ----- Qdrant (Internal Only — never expose to System 1 or System 3) -----
+QDRANT_URL=http://qdrant:6333
+QDRANT_GRPC_PORT=6334
+QDRANT_API_KEY=
+# Default collection for export knowledge
+QDRANT_COLLECTION_NAME=exportease_knowledge
+QDRANT_VECTOR_SIZE=384
+
+# ----- Embedding Engine -----
+# Options: sentence_transformers | openai
+EMBEDDING_PROVIDER=sentence_transformers
+EMBEDDING_MODEL=all-MiniLM-L6-v2
+# Only required if EMBEDDING_PROVIDER=openai
+OPENAI_API_KEY=
+
+# ----- Chunking -----
+CHUNK_SIZE=512
+CHUNK_OVERLAP=64
+
+# ----- Retrieval -----
+RETRIEVAL_TOP_K=5
+RETRIEVAL_SCORE_THRESHOLD=0.60
+# Options: dense | sparse | hybrid
+RETRIEVAL_MODE=hybrid
+
+# ----- Authentication (Inter-system API Key) -----
+API_KEY_SECRET=changeme-replace-in-production
+# Comma-separated list of valid API keys accepted by this service
+ALLOWED_API_KEYS=
+
+# ----- System 1: LLM + Multi-Agent (consumer of this service) -----
+SYSTEM1_BASE_URL=http://system1:8000
+SYSTEM1_HEALTH_PATH=/health
+SYSTEM1_API_VERSION=v1
+# If System 1 is not yet deployed, set to false — health checks will be non-blocking
+SYSTEM1_REQUIRED=false
+
+# ----- System 3: Backend (consumer of this service) -----
+SYSTEM3_BASE_URL=http://system3:8200
+SYSTEM3_HEALTH_PATH=/health
+SYSTEM3_API_VERSION=v1
+SYSTEM3_REQUIRED=false
+
+# ----- Logging -----
+LOG_LEVEL=INFO
+LOG_FORMAT=json
+
+# ----- Environment -----
+ENVIRONMENT=development
+DEBUG=false
+
+# ----- Database (if PostgreSQL used) -----
+DATABASE_URL=postgresql://user:password@localhost:5432/exportease
+
+
+
+==================================================
+
+=== Set 3 (Backend) (Exportease AI\Exportease AI\.env.example) ===
+# ============================================================
+# ExportEase AI - System 3 Backend Configuration
+# EXPORT-EASE-BACKEND-V1
+# ============================================================
+
+# --- Service Configuration ---
+BACKEND_SERVICE_PORT=8000
+BACKEND_HOST=0.0.0.0
+DEBUG=true
+ENVIRONMENT=development
+
+# --- Database ---
+DATABASE_URL=postgresql+asyncpg://exportease:exportease_dev@localhost:5432/exportease_db
+DATABASE_SYNC_URL=postgresql+psycopg2://exportease:exportease_dev@localhost:5432/exportease_db
+DB_POOL_SIZE=10
+DB_MAX_OVERFLOW=20
+
+# --- Authentication ---
+JWT_SECRET_KEY=change-this-to-a-secure-random-string-in-production
+JWT_ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=60
+REFRESH_TOKEN_EXPIRE_DAYS=7
+
+# --- System 1: AI Engine ---
+AI_SERVICE_URL=http://localhost:8001
+AI_SERVICE_TIMEOUT=120
+AI_SERVICE_API_VERSION=v1
+
+# --- System 2: Knowledge / RAG ---
+KNOWLEDGE_SERVICE_URL=http://localhost:8002
+KNOWLEDGE_SERVICE_TIMEOUT=60
+KNOWLEDGE_SERVICE_API_VERSION=v1
+
+# --- Service Mode ---
+REAL_SERVICES=false
+MOCK_SERVICES=true
+
+# --- Shared Contracts ---
+EXPORTEASE_CONTRACTS_PATH=
+EXPORTEASE_CONTRACTS_GIT_URL=
+
+# --- Backend Public URL (for System 4) ---
+BACKEND_PUBLIC_URL=http://localhost:8000
+
+# --- CORS ---
+CORS_ORIGINS=http://localhost:3000,http://localhost:5173
+CORS_ALLOW_CREDENTIALS=true
+
+# --- Logging ---
+LOG_LEVEL=INFO
+LOG_FORMAT=json
+
+# --- Rate Limiting ---
+RATE_LIMIT_PER_MINUTE=60
+
+
+==================================================
+
+=== Set 3 inner (app) (Exportease AI\Exportease AI\app\.env.example) ===
+# ============================================================
+# ExportEase AI - System 3 Backend Configuration
+# EXPORT-EASE-BACKEND-V1
+# ============================================================
+
+# --- Service Configuration ---
+BACKEND_SERVICE_PORT=8000
+BACKEND_HOST=0.0.0.0
+DEBUG=true
+ENVIRONMENT=development
+
+# --- Database ---
+DATABASE_URL=postgresql+asyncpg://exportease:exportease_dev@localhost:5432/exportease_db
+DATABASE_SYNC_URL=postgresql+psycopg2://exportease:exportease_dev@localhost:5432/exportease_db
+DB_POOL_SIZE=10
+DB_MAX_OVERFLOW=20
+
+# --- Authentication ---
+JWT_SECRET_KEY=change-this-to-a-secure-random-string-in-production
+JWT_ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=60
+REFRESH_TOKEN_EXPIRE_DAYS=7
+
+# --- System 1: AI Engine ---
+AI_SERVICE_URL=http://localhost:8001
+AI_SERVICE_TIMEOUT=120
+AI_SERVICE_API_VERSION=v1
+
+# --- System 2: Knowledge / RAG ---
+KNOWLEDGE_SERVICE_URL=http://localhost:8002
+KNOWLEDGE_SERVICE_TIMEOUT=60
+KNOWLEDGE_SERVICE_API_VERSION=v1
+
+# --- Service Mode ---
+REAL_SERVICES=false
+MOCK_SERVICES=true
+
+# --- Shared Contracts ---
+EXPORTEASE_CONTRACTS_PATH=
+EXPORTEASE_CONTRACTS_GIT_URL=
+
+# --- Backend Public URL (for System 4) ---
+BACKEND_PUBLIC_URL=http://localhost:8000
+
+# --- CORS ---
+CORS_ORIGINS=http://localhost:3000,http://localhost:5173
+CORS_ALLOW_CREDENTIALS=true
+
+# --- Logging ---
+LOG_LEVEL=INFO
+LOG_FORMAT=json
+
+# --- Rate Limiting ---
+RATE_LIMIT_PER_MINUTE=60
+
+
+==================================================

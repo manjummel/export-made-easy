@@ -3,8 +3,9 @@ dist/
 .env
 .env.local
 .git_upstream_backup/
-backend/
-*.bat
-*.ps1
-FEATURES_AND_TECH_STACK_REVAMP.md
-scratch_commit.py
+__pycache__/
+*.pyc
+venv/
+.venv/
+push_backend_18.py
+scratch_*.py
