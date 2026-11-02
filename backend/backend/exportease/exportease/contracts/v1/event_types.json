@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "exportease/contracts/v1/event_types",
+  "title": "ExportEase Agent Event Types",
+  "version": "v1.0.0",
+  "event_types": [
+    {
+      "name": "REQUEST_RECEIVED",
+      "description": "The orchestrator has received and validated the incoming request."
+    },
+    {
+      "name": "AGENT_STARTED",
+      "description": "A specific agent has begun processing."
+    },
+    {
+      "name": "SOURCE_RETRIEVED",
+      "description": "The agent has retrieved evidence from the Knowledge service."
+    },
+    {
+      "name": "AGENT_PROCESSING",
+      "description": "The agent is actively processing (LLM inference in progress)."
+    },
+    {
+      "name": "AGENT_COMPLETED",
+      "description": "The agent completed successfully."
+    },
+    {
+      "name": "AGENT_FAILED",
+      "description": "The agent encountered an unrecoverable error."
+    },
+    {
+      "name": "WARNING",
+      "description": "A non-fatal condition (e.g. low confidence, missing optional evidence)."
+    },
+    {
+      "name": "FINAL_RESULT",
+      "description": "The orchestrator emits the final aggregated result for this agent_run_id."
+    }
+  ]
+}

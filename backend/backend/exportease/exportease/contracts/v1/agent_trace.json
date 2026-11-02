@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "exportease/contracts/v1/agent_trace",
+  "title": "ExportEase Agent Trace Event",
+  "version": "v1.0.0",
+  "type": "object",
+  "required": ["agent_event_id", "request_id", "agent_run_id", "agent", "event_type", "status", "timestamp"],
+  "properties": {
+    "agent_event_id": {
+      "type": "string",
+      "description": "Unique event identifier (UUID)."
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Original request identifier. MUST be preserved."
+    },
+    "project_id": {
+      "type": ["string", "null"],
+      "description": "Project identifier."
+    },
+    "agent_run_id": {
+      "type": "string",
+      "description": "Agent execution run identifier. Groups all events for a single workflow run."
+    },
+    "agent": {
+      "type": "string",
+      "enum": [
+        "product_agent",
+        "hs_agent",
+        "compliance_agent",
+        "document_agent",
+        "certification_agent",
+        "market_agent",
+        "risk_agent",
+        "planner_agent",
+        "orchestrator"
+      ],
+      "description": "Name of the agent emitting this event."
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "REQUEST_RECEIVED",
+        "AGENT_STARTED",
+        "SOURCE_RETRIEVED",
+        "AGENT_PROCESSING",
+        "AGENT_COMPLETED",
+        "AGENT_FAILED",
+        "WARNING",
+        "FINAL_RESULT"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["RUNNING", "COMPLETED", "FAILED", "WARNING", "PENDING"]
+    },
+    "partial_output": {
+      "type": ["string", "null"],
+      "description": "Partial or complete textual output from the agent at this point."
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "sources": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Source/chunk/citation IDs referenced in this event."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

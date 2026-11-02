@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "exportease/contracts/v1/knowledge_result",
+  "title": "ExportEase Knowledge Result",
+  "version": "v1.0.0",
+  "description": "Structure of a single knowledge chunk returned by System 2 (EXPORT-EASE-KNOWLEDGE-V1). System 1 MUST NOT access Qdrant directly.",
+  "type": "object",
+  "required": ["chunk_id", "document_id", "source_id", "text", "score", "verification_status"],
+  "properties": {
+    "chunk_id": {"type": "string"},
+    "document_id": {"type": "string"},
+    "source_id": {"type": "string"},
+    "text": {"type": "string", "description": "The retrieved text passage."},
+    "score": {"type": "number", "minimum": 0.0, "maximum": 1.0, "description": "Relevance score."},
+    "authority": {"type": ["string", "null"], "description": "Issuing authority (e.g. DGFT, EU Commission)."},
+    "title": {"type": ["string", "null"]},
+    "page": {"type": ["string", "null"]},
+    "section": {"type": ["string", "null"]},
+    "country": {"type": ["string", "null"]},
+    "product": {"type": ["string", "null"]},
+    "hs_code": {"type": ["string", "null"]},
+    "language": {"type": ["string", "null"]},
+    "publication_date": {"type": ["string", "null"]},
+    "effective_date": {"type": ["string", "null"]},
+    "verification_status": {
+      "type": "string",
+      "enum": ["VERIFIED", "UNVERIFIED", "PENDING", "INSUFFICIENT_GROUNDING"],
+      "description": "CRITICAL: Only VERIFIED chunks may be used for regulatory claims."
+    }
+  }
+}

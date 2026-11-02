@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "exportease/contracts/v1/identifiers",
+  "title": "ExportEase Global Identifiers",
+  "version": "v1.0.0",
+  "description": "Canonical list of cross-system identifier field names. All must be string/UUID-compatible.",
+  "identifiers": [
+    "user_id",
+    "msme_id",
+    "business_id",
+    "product_id",
+    "project_id",
+    "request_id",
+    "agent_run_id",
+    "agent_event_id",
+    "source_id",
+    "document_id",
+    "chunk_id",
+    "citation_id"
+  ],
+  "critical_identifiers": [
+    "request_id",
+    "project_id",
+    "agent_run_id"
+  ],
+  "format": "string (UUID-compatible)"
+}

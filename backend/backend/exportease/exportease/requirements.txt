@@ -1,0 +1,20 @@
+fastapi
+uvicorn[standard]
+httpx
+pydantic>=2.7
+pydantic-settings
+python-dotenv
+langgraph
+langchain-core
+jsonschema
+torch --index-url https://download.pytorch.org/whl/cu121
+transformers
+datasets
+peft
+trl
+accelerate
+bitsandbytes
+sentence-transformers
+pytest
+pytest-asyncio
+pytest-cov
