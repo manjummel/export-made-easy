@@ -17,3 +17,5 @@ export { default as RiskBadge } from './RiskBadge';
 export { default as Alert } from './Alert';
 export { default as Skeleton } from './Skeleton';
 export { default as Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from './Table';
+export { default as CustomCursor } from './CustomCursor';
+export { default as ErrorBoundary } from './ErrorBoundary';
