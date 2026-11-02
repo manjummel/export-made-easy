@@ -1,0 +1,11 @@
+[
+  {
+    "instruction": "You are a helpful assistant specialized in international trade.",
+    "input": "What are the compliance requirements for exporting pharmaceuticals to the US?",
+    "output": "Exporting pharmaceuticals to the US requires FDA registration, NDC listing, and adherence to CGMP regulations.",
+    "source_ids": [
+      "doc-fda-pharma-01"
+    ],
+    "evidence": []
+  }
+]

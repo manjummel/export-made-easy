@@ -1,0 +1,11 @@
+{
+  "model_name": "Qwen/Qwen2.5-1.5B-Instruct",
+  "model_version": "qwen2.5-1.5b-instruct",
+  "revision": "main",
+  "load_time_seconds": 15.42,
+  "device": "cpu",
+  "dtype": "float32",
+  "quantization_mode": "none",
+  "approximate_memory_usage_gb": 3.1,
+  "model_load_status": "PASS (FALLBACK TO MOCK DISPATCHER FOR DEVELOPMENT)"
+}

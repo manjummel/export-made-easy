@@ -1,0 +1,8 @@
+{
+  "model_version": "qwen2.5-1.5b-instruct",
+  "adapter_version": "qlora-adapter-v1.0.0",
+  "tokenizer_version": "qwen2.5-base",
+  "dataset_version": "1.0.1",
+  "training_version": "v1.0.0",
+  "timestamp": "2026-08-12T06:47:51.334522+00:00"
+}

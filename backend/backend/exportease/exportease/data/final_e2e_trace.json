@@ -1,0 +1,850 @@
+{
+  "product": {
+    "product_name": "Turmeric Powder",
+    "product_description": "Ground dried rhizome of Curcuma longa. Golden yellow spice used in food, cosmetics, and medicine.",
+    "product_category": "Spices and Herbs",
+    "export_form": "powder",
+    "origin_state": "Andhra Pradesh / Telangana / Tamil Nadu",
+    "hsn_hint": "0910.30",
+    "confidence": 0.95,
+    "sources": [
+      "chunk-turmeric-hs-001",
+      "chunk-dgft-export-003"
+    ],
+    "warnings": []
+  },
+  "hs_classification": {
+    "hs_code": "0910.30",
+    "hs_description": "Turmeric (Curcuma), ground",
+    "chapter": "09",
+    "heading": "0910",
+    "subheading": "0910.30",
+    "confidence": 0.97,
+    "sources": [
+      "chunk-turmeric-hs-001"
+    ],
+    "warnings": [],
+    "alternative_codes": [
+      {
+        "code": "0910.30.00",
+        "description": "Turmeric, ground \u2014 full WCO code"
+      }
+    ]
+  },
+  "compliance": {
+    "target_country": "Germany",
+    "requirements": [
+      {
+        "regulation_name": "EU Food Safety Regulation EC 1881/2006",
+        "authority": "European Commission",
+        "description": "Maximum residue limits for aflatoxins in spices (5 \u00b5g/kg).",
+        "mandatory": true,
+        "source_id": "chunk-eu-spice-002"
+      },
+      {
+        "regulation_name": "DGFT Foreign Trade Policy 2023",
+        "authority": "DGFT, India",
+        "description": "Turmeric export classified as Free. IEC mandatory.",
+        "mandatory": true,
+        "source_id": "chunk-dgft-export-003"
+      }
+    ],
+    "export_restrictions": [],
+    "import_restrictions": [
+      "MRL compliance required"
+    ],
+    "confidence": 0.91,
+    "sources": [
+      "chunk-eu-spice-002",
+      "chunk-dgft-export-003"
+    ],
+    "warnings": [
+      "Verify current MRL levels before shipment."
+    ],
+    "grounding_status": "SUFFICIENT"
+  },
+  "documents": {
+    "required_documents": [
+      {
+        "document_name": "Commercial Invoice",
+        "issuing_authority": "Exporter",
+        "mandatory": true,
+        "description": "Detailed invoice specifying goods, value, terms.",
+        "estimated_processing_days": 1
+      },
+      {
+        "document_name": "Phytosanitary Certificate",
+        "issuing_authority": "APEDA / NPPO India",
+        "mandatory": true,
+        "description": "Required by EU for plant-based food imports.",
+        "estimated_processing_days": 5
+      },
+      {
+        "document_name": "Certificate of Origin",
+        "issuing_authority": "DGFT / Export Promotion Council",
+        "mandatory": true,
+        "description": "Proves Indian origin for GSP/DCTS benefits.",
+        "estimated_processing_days": 3
+      },
+      {
+        "document_name": "Bill of Lading / Airway Bill",
+        "issuing_authority": "Shipping/Airline Carrier",
+        "mandatory": true,
+        "description": "Transport document.",
+        "estimated_processing_days": 1
+      },
+      {
+        "document_name": "Packing List",
+        "issuing_authority": "Exporter",
+        "mandatory": true,
+        "description": "Itemized list of shipment contents.",
+        "estimated_processing_days": 1
+      }
+    ],
+    "optional_documents": [
+      {
+        "document_name": "Spices Board Quality Certificate",
+        "issuing_authority": "Spices Board of India",
+        "mandatory": false,
+        "description": "Enhances buyer confidence in quality.",
+        "estimated_processing_days": 7
+      }
+    ],
+    "confidence": 0.9,
+    "sources": [
+      "chunk-apeda-cert-005",
+      "chunk-eu-spice-002"
+    ],
+    "warnings": []
+  },
+  "certifications": {
+    "certifications": [
+      {
+        "certification_name": "APEDA RCMC",
+        "issuing_body": "APEDA, India",
+        "mandatory": true,
+        "description": "Registration-cum-Membership Certificate. Required for export benefit claims.",
+        "estimated_cost_inr": 5000,
+        "validity_months": 60
+      },
+      {
+        "certification_name": "IEC (Importer-Exporter Code)",
+        "issuing_body": "DGFT, India",
+        "mandatory": true,
+        "description": "Mandatory for all Indian exporters.",
+        "estimated_cost_inr": 500,
+        "validity_months": null
+      },
+      {
+        "certification_name": "Organic Certification (Optional)",
+        "issuing_body": "APEDA / Accredited certifier",
+        "mandatory": false,
+        "description": "EU Organic label commands premium price in Germany.",
+        "estimated_cost_inr": 25000,
+        "validity_months": 12
+      }
+    ],
+    "confidence": 0.88,
+    "sources": [
+      "chunk-apeda-cert-005",
+      "chunk-dgft-export-003"
+    ],
+    "warnings": [
+      "Verify RCMC validity before each shipment."
+    ]
+  },
+  "market": {
+    "target_country": "Germany",
+    "market_size_usd": "~EUR 45 million (spices total, 2023)",
+    "demand_trend": "Growing \u2014 driven by organic food and health supplement sectors",
+    "key_buyers": [
+      "Organic food wholesalers",
+      "Pharmaceutical ingredient importers",
+      "Ethnic food distributors",
+      "Supermarket chains (REWE, Edeka)"
+    ],
+    "competitors": [
+      "Vietnam",
+      "Madagascar",
+      "Peru"
+    ],
+    "entry_barriers": [
+      "Strict EU MRL compliance",
+      "Organic certification preference",
+      "Long-term buyer relationships required"
+    ],
+    "price_range_usd": "USD 1,200\u20132,500 per MT (depending on quality/grade)",
+    "seasonal_demand": "Year-round with peaks in autumn/winter",
+    "confidence": 0.82,
+    "sources": [
+      "chunk-germany-import-004"
+    ],
+    "warnings": [
+      "Market data is indicative \u2014 verify with current trade data."
+    ]
+  },
+  "risk": {
+    "overall_risk_level": "MEDIUM",
+    "risk_score": 0.42,
+    "risk_factors": [
+      {
+        "risk_name": "MRL Rejection Risk",
+        "severity": "HIGH",
+        "description": "EU border rejection if aflatoxin/pesticide MRL exceeded.",
+        "mitigation": "Pre-shipment lab testing. Engage APEDA-approved testing lab."
+      },
+      {
+        "risk_name": "Currency Risk",
+        "severity": "MEDIUM",
+        "description": "INR/EUR fluctuation affects realized margins.",
+        "mitigation": "Forward exchange contract with bank."
+      },
+      {
+        "risk_name": "Logistics Delay",
+        "severity": "LOW",
+        "description": "Sea freight from India to Germany: 25\u201335 days.",
+        "mitigation": "Buffer stock planning. Multiple freight forwarders."
+      }
+    ],
+    "confidence": 0.85,
+    "sources": [
+      "chunk-eu-spice-002",
+      "chunk-dgft-export-003"
+    ],
+    "warnings": []
+  },
+  "export_plan": {
+    "export_plan_summary": "A structured 90-day export plan for Indian MSME exporting turmeric powder to Germany. Key steps: obtain IEC and RCMC, complete pre-shipment testing, secure phytosanitary certificate, negotiate with German buyer, and arrange sea freight.",
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Obtain IEC (Importer-Exporter Code)",
+        "description": "Apply online via DGFT portal. Mandatory for all exports.",
+        "estimated_days": 7,
+        "estimated_cost_inr": 500,
+        "dependencies": []
+      },
+      {
+        "step_number": 2,
+        "title": "Register with APEDA (RCMC)",
+        "description": "Obtain Registration-cum-Membership Certificate for export benefits.",
+        "estimated_days": 14,
+        "estimated_cost_inr": 5000,
+        "dependencies": [
+          1
+        ]
+      },
+      {
+        "step_number": 3,
+        "title": "Pre-Shipment Quality Testing",
+        "description": "Test for aflatoxins, pesticide residues at NABL-accredited lab.",
+        "estimated_days": 10,
+        "estimated_cost_inr": 15000,
+        "dependencies": []
+      },
+      {
+        "step_number": 4,
+        "title": "Obtain Phytosanitary Certificate",
+        "description": "Apply to APEDA/NPPO. Required by EU for plant-based food.",
+        "estimated_days": 5,
+        "estimated_cost_inr": 2000,
+        "dependencies": [
+          3
+        ]
+      },
+      {
+        "step_number": 5,
+        "title": "Identify and Negotiate with German Buyer",
+        "description": "Use FIEO, German Chamber of Commerce, B2B trade portals.",
+        "estimated_days": 30,
+        "estimated_cost_inr": 10000,
+        "dependencies": [
+          1
+        ]
+      },
+      {
+        "step_number": 6,
+        "title": "Arrange Freight and Insurance",
+        "description": "Sea freight (FOB/CIF). Cargo insurance mandatory.",
+        "estimated_days": 5,
+        "estimated_cost_inr": 50000,
+        "dependencies": [
+          4,
+          5
+        ]
+      },
+      {
+        "step_number": 7,
+        "title": "Ship Consignment",
+        "description": "Load at port. Submit shipping bill via ICEGATE.",
+        "estimated_days": 35,
+        "estimated_cost_inr": null,
+        "dependencies": [
+          6
+        ]
+      }
+    ],
+    "total_estimated_days": 90,
+    "total_estimated_cost_inr": 82500,
+    "recommended_incoterms": "FOB (Free on Board) \u2014 exporter bears cost to Indian port",
+    "recommended_payment_terms": "Letter of Credit (LC) or 30% advance + 70% on BL",
+    "confidence": 0.88,
+    "sources": [
+      "chunk-turmeric-hs-001",
+      "chunk-eu-spice-002",
+      "chunk-dgft-export-003",
+      "chunk-germany-import-004",
+      "chunk-apeda-cert-005"
+    ],
+    "warnings": [
+      "All cost estimates are indicative. Verify with current service providers.",
+      "Regulatory requirements may change. Verify before each shipment."
+    ]
+  },
+  "agent_events": [
+    {
+      "agent_event_id": "6719df6f-89c4-4f0e-a615-14961fe6b723",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "orchestrator",
+      "event_type": "REQUEST_RECEIVED",
+      "status": "RUNNING",
+      "partial_output": "Request received. Query: I want to export turmeric powder to Germany.",
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.646084Z"
+    },
+    {
+      "agent_event_id": "0c6a58d9-6032-4b75-9f92-dd7154923ea2",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "product_agent",
+      "event_type": "AGENT_STARTED",
+      "status": "RUNNING",
+      "partial_output": null,
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.651255Z"
+    },
+    {
+      "agent_event_id": "d1a2b6f2-4227-4ce7-a19a-6226ef620135",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "product_agent",
+      "event_type": "SOURCE_RETRIEVED",
+      "status": "RUNNING",
+      "partial_output": "Retrieved 5 knowledge chunk(s).",
+      "confidence": 0.0,
+      "sources": [
+        "chunk-turmeric-hs-001",
+        "chunk-eu-spice-002",
+        "chunk-dgft-export-003",
+        "chunk-germany-import-004",
+        "chunk-apeda-cert-005"
+      ],
+      "timestamp": "2026-08-12T07:02:18.651367Z"
+    },
+    {
+      "agent_event_id": "8ebf965e-48cc-4f46-b627-80b3b9368227",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "product_agent",
+      "event_type": "AGENT_PROCESSING",
+      "status": "RUNNING",
+      "partial_output": "Identifying product details.",
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.651442Z"
+    },
+    {
+      "agent_event_id": "a5692edf-75e1-4f4d-afbb-220a6b6ac73d",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "product_agent",
+      "event_type": "AGENT_COMPLETED",
+      "status": "COMPLETED",
+      "partial_output": null,
+      "confidence": 0.95,
+      "sources": [
+        "chunk-apeda-cert-005",
+        "chunk-germany-import-004",
+        "chunk-turmeric-hs-001",
+        "chunk-dgft-export-003",
+        "chunk-eu-spice-002"
+      ],
+      "timestamp": "2026-08-12T07:02:18.651572Z"
+    },
+    {
+      "agent_event_id": "bf333b17-ab25-461b-b644-b6a7690b493c",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "hs_agent",
+      "event_type": "AGENT_STARTED",
+      "status": "RUNNING",
+      "partial_output": null,
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.652389Z"
+    },
+    {
+      "agent_event_id": "734bd0cc-a70a-42d5-a457-35bfd2f0eeaa",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "hs_agent",
+      "event_type": "SOURCE_RETRIEVED",
+      "status": "RUNNING",
+      "partial_output": "Retrieved 5 knowledge chunk(s).",
+      "confidence": 0.0,
+      "sources": [
+        "chunk-turmeric-hs-001",
+        "chunk-eu-spice-002",
+        "chunk-dgft-export-003",
+        "chunk-germany-import-004",
+        "chunk-apeda-cert-005"
+      ],
+      "timestamp": "2026-08-12T07:02:18.652484Z"
+    },
+    {
+      "agent_event_id": "6468473b-9754-4691-9108-5de10256fe7c",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "hs_agent",
+      "event_type": "AGENT_PROCESSING",
+      "status": "RUNNING",
+      "partial_output": "Classifying under Harmonized System.",
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.652544Z"
+    },
+    {
+      "agent_event_id": "4f2fcfd7-c96e-446a-bbb2-d5398896fcf8",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "hs_agent",
+      "event_type": "AGENT_COMPLETED",
+      "status": "COMPLETED",
+      "partial_output": null,
+      "confidence": 0.97,
+      "sources": [
+        "chunk-apeda-cert-005",
+        "chunk-germany-import-004",
+        "chunk-turmeric-hs-001",
+        "chunk-dgft-export-003",
+        "chunk-eu-spice-002"
+      ],
+      "timestamp": "2026-08-12T07:02:18.652676Z"
+    },
+    {
+      "agent_event_id": "c2320517-968f-4cb1-98a7-1f26cad810e2",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "compliance_agent",
+      "event_type": "AGENT_STARTED",
+      "status": "RUNNING",
+      "partial_output": null,
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.653349Z"
+    },
+    {
+      "agent_event_id": "f6b61b7a-fa37-4bc7-b456-45a9515cdb22",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "compliance_agent",
+      "event_type": "SOURCE_RETRIEVED",
+      "status": "RUNNING",
+      "partial_output": "Retrieved 5 knowledge chunk(s).",
+      "confidence": 0.0,
+      "sources": [
+        "chunk-turmeric-hs-001",
+        "chunk-eu-spice-002",
+        "chunk-dgft-export-003",
+        "chunk-germany-import-004",
+        "chunk-apeda-cert-005"
+      ],
+      "timestamp": "2026-08-12T07:02:18.653428Z"
+    },
+    {
+      "agent_event_id": "4efc68e5-077b-4de8-b821-651677f99ca9",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "compliance_agent",
+      "event_type": "AGENT_PROCESSING",
+      "status": "RUNNING",
+      "partial_output": "Checking compliance requirements.",
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.653470Z"
+    },
+    {
+      "agent_event_id": "44621a1c-8959-4d38-946a-785568432f45",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "compliance_agent",
+      "event_type": "AGENT_COMPLETED",
+      "status": "COMPLETED",
+      "partial_output": null,
+      "confidence": 0.91,
+      "sources": [
+        "chunk-apeda-cert-005",
+        "chunk-germany-import-004",
+        "chunk-turmeric-hs-001",
+        "chunk-dgft-export-003",
+        "chunk-eu-spice-002"
+      ],
+      "timestamp": "2026-08-12T07:02:18.653618Z"
+    },
+    {
+      "agent_event_id": "b828a097-8969-4192-823f-ba7ce7cdaa50",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "document_agent",
+      "event_type": "AGENT_STARTED",
+      "status": "RUNNING",
+      "partial_output": null,
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.654272Z"
+    },
+    {
+      "agent_event_id": "2446a803-4a84-4a4e-9928-bd44fd9eb609",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "document_agent",
+      "event_type": "SOURCE_RETRIEVED",
+      "status": "RUNNING",
+      "partial_output": "Retrieved 5 knowledge chunk(s).",
+      "confidence": 0.0,
+      "sources": [
+        "chunk-turmeric-hs-001",
+        "chunk-eu-spice-002",
+        "chunk-dgft-export-003",
+        "chunk-germany-import-004",
+        "chunk-apeda-cert-005"
+      ],
+      "timestamp": "2026-08-12T07:02:18.654322Z"
+    },
+    {
+      "agent_event_id": "b576389c-dac9-4d7e-be63-52759a466181",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "document_agent",
+      "event_type": "AGENT_PROCESSING",
+      "status": "RUNNING",
+      "partial_output": "Identifying required documents.",
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.654361Z"
+    },
+    {
+      "agent_event_id": "014b6c61-8476-40f5-ac27-1b136ddfe1d8",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "document_agent",
+      "event_type": "AGENT_COMPLETED",
+      "status": "COMPLETED",
+      "partial_output": null,
+      "confidence": 0.9,
+      "sources": [
+        "chunk-apeda-cert-005",
+        "chunk-germany-import-004",
+        "chunk-turmeric-hs-001",
+        "chunk-dgft-export-003",
+        "chunk-eu-spice-002"
+      ],
+      "timestamp": "2026-08-12T07:02:18.654483Z"
+    },
+    {
+      "agent_event_id": "7cf741de-8e54-44c9-9aca-afa23ca570a1",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "certification_agent",
+      "event_type": "AGENT_STARTED",
+      "status": "RUNNING",
+      "partial_output": null,
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.655093Z"
+    },
+    {
+      "agent_event_id": "4762c8c4-b729-45c9-bd91-a08c29f9cbf8",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "certification_agent",
+      "event_type": "SOURCE_RETRIEVED",
+      "status": "RUNNING",
+      "partial_output": "Retrieved 5 knowledge chunk(s).",
+      "confidence": 0.0,
+      "sources": [
+        "chunk-turmeric-hs-001",
+        "chunk-eu-spice-002",
+        "chunk-dgft-export-003",
+        "chunk-germany-import-004",
+        "chunk-apeda-cert-005"
+      ],
+      "timestamp": "2026-08-12T07:02:18.655141Z"
+    },
+    {
+      "agent_event_id": "0e32883d-146f-4b3f-8f74-e18e322517f3",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "certification_agent",
+      "event_type": "AGENT_PROCESSING",
+      "status": "RUNNING",
+      "partial_output": "Identifying required certifications.",
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.655205Z"
+    },
+    {
+      "agent_event_id": "1e83d962-0544-41cd-9505-2f8028474776",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "certification_agent",
+      "event_type": "AGENT_COMPLETED",
+      "status": "COMPLETED",
+      "partial_output": null,
+      "confidence": 0.88,
+      "sources": [
+        "chunk-apeda-cert-005",
+        "chunk-germany-import-004",
+        "chunk-turmeric-hs-001",
+        "chunk-dgft-export-003",
+        "chunk-eu-spice-002"
+      ],
+      "timestamp": "2026-08-12T07:02:18.655313Z"
+    },
+    {
+      "agent_event_id": "5dfda067-55b1-4fed-9e9f-58b3c117b18b",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "market_agent",
+      "event_type": "AGENT_STARTED",
+      "status": "RUNNING",
+      "partial_output": null,
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.655928Z"
+    },
+    {
+      "agent_event_id": "085544ac-1bc1-4e03-a9fe-c2f2022d4e6a",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "market_agent",
+      "event_type": "SOURCE_RETRIEVED",
+      "status": "RUNNING",
+      "partial_output": "Retrieved 5 knowledge chunk(s).",
+      "confidence": 0.0,
+      "sources": [
+        "chunk-turmeric-hs-001",
+        "chunk-eu-spice-002",
+        "chunk-dgft-export-003",
+        "chunk-germany-import-004",
+        "chunk-apeda-cert-005"
+      ],
+      "timestamp": "2026-08-12T07:02:18.655978Z"
+    },
+    {
+      "agent_event_id": "ce00505a-045b-4b16-abae-60a9d0b2ce40",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "market_agent",
+      "event_type": "AGENT_PROCESSING",
+      "status": "RUNNING",
+      "partial_output": "Gathering market intelligence.",
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.656017Z"
+    },
+    {
+      "agent_event_id": "2a692df2-4cd4-4053-b048-e555d1088264",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "market_agent",
+      "event_type": "AGENT_COMPLETED",
+      "status": "COMPLETED",
+      "partial_output": null,
+      "confidence": 0.82,
+      "sources": [
+        "chunk-apeda-cert-005",
+        "chunk-germany-import-004",
+        "chunk-turmeric-hs-001",
+        "chunk-dgft-export-003",
+        "chunk-eu-spice-002"
+      ],
+      "timestamp": "2026-08-12T07:02:18.656126Z"
+    },
+    {
+      "agent_event_id": "69d9c5a2-b73e-4e7a-9ed9-1d302fe63e1d",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "risk_agent",
+      "event_type": "AGENT_STARTED",
+      "status": "RUNNING",
+      "partial_output": null,
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.656747Z"
+    },
+    {
+      "agent_event_id": "f2420ec6-f837-4b01-88fd-e5c5f306572d",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "risk_agent",
+      "event_type": "SOURCE_RETRIEVED",
+      "status": "RUNNING",
+      "partial_output": "Retrieved 5 knowledge chunk(s).",
+      "confidence": 0.0,
+      "sources": [
+        "chunk-turmeric-hs-001",
+        "chunk-eu-spice-002",
+        "chunk-dgft-export-003",
+        "chunk-germany-import-004",
+        "chunk-apeda-cert-005"
+      ],
+      "timestamp": "2026-08-12T07:02:18.656819Z"
+    },
+    {
+      "agent_event_id": "dcfaf388-4d86-4c90-aa8b-f48ade2be41f",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "risk_agent",
+      "event_type": "AGENT_PROCESSING",
+      "status": "RUNNING",
+      "partial_output": "Assessing export risk factors.",
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.656857Z"
+    },
+    {
+      "agent_event_id": "2b2b401a-9034-431a-898c-40d07f3eda84",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "risk_agent",
+      "event_type": "AGENT_COMPLETED",
+      "status": "COMPLETED",
+      "partial_output": null,
+      "confidence": 0.85,
+      "sources": [
+        "chunk-apeda-cert-005",
+        "chunk-germany-import-004",
+        "chunk-turmeric-hs-001",
+        "chunk-dgft-export-003",
+        "chunk-eu-spice-002"
+      ],
+      "timestamp": "2026-08-12T07:02:18.656962Z"
+    },
+    {
+      "agent_event_id": "e2d67031-add3-4476-be29-c63069bdd12d",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "planner_agent",
+      "event_type": "AGENT_STARTED",
+      "status": "RUNNING",
+      "partial_output": null,
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.657518Z"
+    },
+    {
+      "agent_event_id": "e704d1af-a636-4101-81d3-ce20b7fb0d86",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "planner_agent",
+      "event_type": "SOURCE_RETRIEVED",
+      "status": "RUNNING",
+      "partial_output": "Retrieved 3 knowledge chunk(s).",
+      "confidence": 0.0,
+      "sources": [
+        "chunk-turmeric-hs-001",
+        "chunk-eu-spice-002",
+        "chunk-dgft-export-003"
+      ],
+      "timestamp": "2026-08-12T07:02:18.657556Z"
+    },
+    {
+      "agent_event_id": "34a90d26-bea5-4ad0-a562-3ae0bb58e74f",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "planner_agent",
+      "event_type": "AGENT_PROCESSING",
+      "status": "RUNNING",
+      "partial_output": "Generating comprehensive export plan.",
+      "confidence": 0.0,
+      "sources": [],
+      "timestamp": "2026-08-12T07:02:18.657614Z"
+    },
+    {
+      "agent_event_id": "fc2ab554-ad09-466e-9f2a-3cf0b09e8b98",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "planner_agent",
+      "event_type": "AGENT_COMPLETED",
+      "status": "COMPLETED",
+      "partial_output": null,
+      "confidence": 0.88,
+      "sources": [
+        "chunk-apeda-cert-005",
+        "chunk-germany-import-004",
+        "chunk-turmeric-hs-001",
+        "chunk-dgft-export-003",
+        "chunk-eu-spice-002"
+      ],
+      "timestamp": "2026-08-12T07:02:18.657792Z"
+    },
+    {
+      "agent_event_id": "e65b1b8d-a44e-46f7-87d1-f86935bd4e2d",
+      "request_id": "e6b404c9-135a-4f7a-9128-6d7b77248b34",
+      "project_id": "proj-e2e-final",
+      "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+      "agent": "orchestrator",
+      "event_type": "FINAL_RESULT",
+      "status": "COMPLETED",
+      "partial_output": "Workflow complete. Status: SUCCESS",
+      "confidence": 0.8926,
+      "sources": [
+        "chunk-apeda-cert-005",
+        "chunk-germany-import-004",
+        "chunk-turmeric-hs-001",
+        "chunk-dgft-export-003",
+        "chunk-eu-spice-002"
+      ],
+      "timestamp": "2026-08-12T07:02:18.657829Z"
+    }
+  ],
+  "agent_run_id": "8228be04-14f3-4984-bfa9-7371be57c65a",
+  "workflow_status": "SUCCESS"
+}

@@ -1,0 +1,7 @@
+{
+  "base_model_version": "qwen2.5-1.5b-instruct",
+  "tokenizer_version": "qwen2.5-base",
+  "dataset_version": "1.0.1",
+  "qlora_config_version": "v1.0.0",
+  "status": "configured_not_trained"
+}

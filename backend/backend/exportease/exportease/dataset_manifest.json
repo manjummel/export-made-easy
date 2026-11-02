@@ -1,0 +1,10 @@
+{
+  "dataset_id": "exportease-finetune-v1",
+  "dataset_version": "1.0.1",
+  "schema_version": "v1",
+  "total_raw": 5,
+  "train_count": 2,
+  "validation_count": 1,
+  "test_count": 1,
+  "source_system": "EXPORT-EASE-KNOWLEDGE-V1"
+}

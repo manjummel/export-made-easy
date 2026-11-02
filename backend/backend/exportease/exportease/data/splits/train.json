@@ -1,0 +1,21 @@
+[
+  {
+    "instruction": "You are a helpful assistant specialized in international trade.",
+    "input": "What is the HS code for generic black tea?",
+    "output": "The HS code for generic black tea (fermented) is typically 0902.30.",
+    "source_ids": [
+      "doc-hs-090230"
+    ],
+    "evidence": []
+  },
+  {
+    "instruction": "You are a helpful assistant specialized in international trade.",
+    "input": "What certifications are required to export organic honey to the EU?",
+    "output": "Exporting organic honey to the EU requires a TRACES NT certificate, health certificate, and organic certification from an EU-recognized body.",
+    "source_ids": [
+      "doc-eu-honey-01",
+      "doc-traces-01"
+    ],
+    "evidence": []
+  }
+]
