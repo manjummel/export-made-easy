@@ -1,2 +1,1 @@
-// Export Currency-specific sub-components here when built
-export {};
+export { default as CurrencyConverterWidget } from './CurrencyConverterWidget';
