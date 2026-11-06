@@ -198,10 +198,92 @@ def parse_export_fields(raw_text: str, filename: str, doc_type_hint: Optional[st
             except Exception:
                 pass
 
+    # 8. Gross and Net Weights
+    gw_match = re.search(r"(?:gross\s*weight|g\.?w\.?)[:\s\-]+([\d,]+(?:\.\d+)?)\s*(?:kg|kgs|mt)?", t, re.IGNORECASE)
+    gross_weight = None
+    if gw_match:
+        try:
+            gross_weight = float(gw_match.group(1).replace(",", ""))
+        except Exception:
+            pass
+
+    nw_match = re.search(r"(?:net\s*weight|n\.?w\.?)[:\s\-]+([\d,]+(?:\.\d+)?)\s*(?:kg|kgs|mt)?", t, re.IGNORECASE)
+    net_weight = None
+    if nw_match:
+        try:
+            net_weight = float(nw_match.group(1).replace(",", ""))
+        except Exception:
+            pass
+
+    # 9. Total Amount & Currency
+    amt_match = re.search(r"(?:total\s*amount|invoice\s*value|total|fob\s*value|cif\s*value)[:\s\-]+([A-Z]{3}|\$|€|£|₹)?\s*([\d,]+(?:\.\d+)?)", t, re.IGNORECASE)
+    total_amount = None
+    currency = "USD"
+    if amt_match:
+        curr_raw = amt_match.group(1)
+        if curr_raw:
+            curr_raw = curr_raw.strip()
+            if curr_raw == "$": currency = "USD"
+            elif curr_raw == "€": currency = "EUR"
+            elif curr_raw == "₹": currency = "INR"
+            elif curr_raw == "£": currency = "GBP"
+            else: currency = curr_raw.upper()
+        try:
+            total_amount = float(amt_match.group(2).replace(",", ""))
+        except Exception:
+            pass
+
+    # 10. Ports (POL / POD)
+    pol_match = re.search(r"(?:port\s*of\s*loading|loading\s*port|pol)[:\s\-]+([^\n\r,]+)", t, re.IGNORECASE)
+    port_of_loading = pol_match.group(1).strip() if pol_match else None
+
+    pod_match = re.search(r"(?:port\s*of\s*discharge|discharge\s*port|pod|destination\s*port)[:\s\-]+([^\n\r,]+)", t, re.IGNORECASE)
+    port_of_discharge = pod_match.group(1).strip() if pod_match else None
+
+    # Determine / infer doc_type
+    doc_type = doc_type_hint or infer_doc_type(raw_text, filename)
+
+    # Calculate extraction confidence
+    populated_fields = [exporter_name, importer_name, invoice_number, invoice_date, product_description, hs_code, quantity]
+    score = int((sum(1 for f in populated_fields if f is not None) / len(populated_fields)) * 100)
+    confidence = max(40, min(100, score))
+
     return {
         "filename": filename,
+        "document_type": doc_type,
+        "document_label": DOC_TYPE_LABELS.get(doc_type, doc_type.replace("_", " ").title()),
+        "raw_text_snippet": raw_text[:300] if raw_text else "",
+        "confidence": confidence,
         "fields": {
+            "exporter_name": exporter_name,
+            "importer_name": importer_name,
+            "invoice_number": invoice_number,
+            "invoice_date": invoice_date,
+            "product_description": product_description,
+            "hs_code": hs_code,
             "quantity": quantity,
-            "unit": unit
+            "unit": unit,
+            "gross_weight": gross_weight,
+            "net_weight": net_weight,
+            "total_amount": total_amount,
+            "currency": currency,
+            "port_of_loading": port_of_loading,
+            "port_of_discharge": port_of_discharge,
         }
     }
+
+
+def infer_doc_type(text: str, filename: str) -> str:
+    """Infer document type from text and filename signals."""
+    combined = (filename + " " + text).lower()
+    if any(k in combined for k in ["bill of lading", "ocean bill", "bl ", "b/l", "waybill", "seaway"]):
+        return "bill_of_lading"
+    if any(k in combined for k in ["packing list", "package list", "weight list"]):
+        return "packing_list"
+    if any(k in combined for k in ["certificate of origin", "coo", "form a", "rex", "rules of origin"]):
+        return "certificate_of_origin"
+    if any(k in combined for k in ["purchase order", "po #", "p.o.", "order confirmation"]):
+        return "purchase_order"
+    return "commercial_invoice"
+
+
