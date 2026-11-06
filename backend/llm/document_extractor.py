@@ -167,10 +167,23 @@ def parse_export_fields(raw_text: str, filename: str, doc_type_hint: Optional[st
                 importer_name = val
                 break
 
+    # 6. Product Description
+    desc_patterns = [
+        r"(?:product|description\s*of\s*goods|item\s*description|description|goods)[:\s\-]+([^\n\r]+)",
+    ]
+    product_description = None
+    for p in desc_patterns:
+        m = re.search(p, t, re.IGNORECASE)
+        if m:
+            val = m.group(1).strip()
+            if len(val) > 3 and not val.lower().startswith("goods"):
+                product_description = val
+                break
+
     return {
         "filename": filename,
         "fields": {
-            "exporter_name": exporter_name,
-            "importer_name": importer_name
+            "product_description": product_description,
+            "hs_code": hs_code
         }
     }
