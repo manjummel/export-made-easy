@@ -220,3 +220,315 @@ async def extract_documents_endpoint(
         "documents": extracted_results
     }
 
+@app.post("/api/documents/cross-verify")
+@app.post("/api/v1/documents/cross-verify")
+async def cross_verify_endpoint(req: CrossVerifyRequest):
+    """
+    Cross-verify extracted documents (Commercial Invoice, Packing List, Purchase Order, Bill of Lading, Certificate of Origin)
+    and detect discrepancies before ICEGATE filing.
+    """
+    if not req.documents:
+        raise HTTPException(status_code=400, detail="At least one document must be provided for cross-verification.")
+    
+    result = document_extractor.cross_verify_documents(req.documents)
+    return result
+
+@app.post("/api/documents/upload-and-verify")
+@app.post("/api/v1/documents/upload-and-verify")
+async def upload_and_verify_endpoint(
+    files: List[UploadFile] = File(...),
+    types: Optional[str] = Form(None)
+):
+    """
+    All-in-one endpoint: upload multiple files, perform OCR extraction, and execute cross-verification.
+    """
+    doc_type_hints = {}
+    if types:
+        try:
+            parsed_types = json.loads(types)
+            if isinstance(parsed_types, dict):
+                doc_type_hints = parsed_types
+            elif isinstance(parsed_types, list):
+                doc_type_hints = {idx: t for idx, t in enumerate(parsed_types)}
+        except Exception:
+            pass
+
+    extracted_results = []
+    for idx, file in enumerate(files):
+        content = await file.read()
+        type_hint = doc_type_hints.get(file.filename) or doc_type_hints.get(idx) or doc_type_hints.get(str(idx))
+        
+        raw_text = document_extractor.extract_raw_text(content, file.filename)
+        parsed_doc = document_extractor.parse_export_fields(raw_text, file.filename, type_hint)
+        parsed_doc["file_size_bytes"] = len(content)
+        extracted_results.append(parsed_doc)
+
+    verification_result = document_extractor.cross_verify_documents(extracted_results)
+    return verification_result
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Feature 2: EU CBAM (Carbon Border Adjustment Mechanism) Calculator
+# ─────────────────────────────────────────────────────────────────────────────
+class CBAMRequest(BaseModel):
+    product_category: str = "Steel & Iron"
+    production_route: str = "Blast Furnace - Basic Oxygen Furnace (BF-BOF)"
+    export_tonnage: float = 120.0
+    country_of_origin: str = "India"
+    destination_country: str = "Germany (EU)"
+    electricity_grid_factor: Optional[float] = 0.71
+    transport_mode: str = "Sea Freight (Container Vessel)"
+
+@app.post("/api/cbam-estimate")
+@app.post("/api/v1/cbam-estimate")
+async def cbam_estimate_endpoint(req: CBAMRequest):
+    # Benchmark emissions factors (tCO2e per metric tonne)
+    factors = {
+        "Steel & Iron": {
+            "Blast Furnace - Basic Oxygen Furnace (BF-BOF)": {"direct": 2.15, "indirect": 0.45},
+            "Electric Arc Furnace (EAF)": {"direct": 0.45, "indirect": 0.65},
+            "Direct Reduced Iron (DRI) - Gas based": {"direct": 1.10, "indirect": 0.35}
+        },
+        "Aluminium": {
+            "Primary Smelting (Coal Powered)": {"direct": 2.20, "indirect": 12.80},
+            "Primary Smelting (Renewable Powered)": {"direct": 1.90, "indirect": 2.10},
+            "Secondary Recycled Aluminium": {"direct": 0.50, "indirect": 0.40}
+        },
+        "Fertilizers": {
+            "Haber-Bosch Ammonia / Urea": {"direct": 2.30, "indirect": 0.85},
+            "Nitric Acid": {"direct": 1.70, "indirect": 0.40}
+        },
+        "Cement": {
+            "Portland Clinker Dry Kiln": {"direct": 0.82, "indirect": 0.12},
+            "Blended Pozzolana Cement": {"direct": 0.54, "indirect": 0.09}
+        }
+    }
+    
+    cat = req.product_category if req.product_category in factors else "Steel & Iron"
+    routes = factors[cat]
+    route_data = routes.get(req.production_route, list(routes.values())[0])
+    
+    direct_per_ton = route_data["direct"]
+    indirect_per_ton = route_data["indirect"]
+    
+    # Transport emissions (approx Mumbai/Mundra to Hamburg/Rotterdam ~ 6,500 nautical miles)
+    transport_factor_per_ton = 0.082 # tCO2e for 6500nm sea freight
+    
+    total_direct = direct_per_ton * req.export_tonnage
+    total_indirect = indirect_per_ton * req.export_tonnage
+    total_transport = transport_factor_per_ton * req.export_tonnage
+    total_emissions = total_direct + total_indirect + total_transport
+    
+    # EU ETS Benchmark price (€/tonne CO2)
+    eu_ets_price_eur = 78.50
+    eur_to_inr = 91.20
+    
+    # Financial liability under EU CBAM
+    cbam_tax_eur = total_emissions * eu_ets_price_eur
+    cbam_tax_inr = cbam_tax_eur * eur_to_inr
+    
+    # Cost addition per metric ton
+    cost_per_ton_eur = cbam_tax_eur / max(1, req.export_tonnage)
+    
+    # Decarbonization pathway savings
+    green_route_name = list(routes.keys())[-1]
+    green_direct = routes[green_route_name]["direct"]
+    green_indirect = routes[green_route_name]["indirect"]
+    green_total_emissions = (green_direct + green_indirect + transport_factor_per_ton) * req.export_tonnage
+    potential_savings_eur = max(0, cbam_tax_eur - (green_total_emissions * eu_ets_price_eur))
+    
+    return {
+        "status": "success",
+        "inputs": req.dict(),
+        "emission_breakdown": {
+            "direct_emissions_tCO2e": round(total_direct, 2),
+            "indirect_emissions_tCO2e": round(total_indirect, 2),
+            "transport_emissions_tCO2e": round(total_transport, 2),
+            "total_embedded_emissions_tCO2e": round(total_emissions, 2),
+            "intensity_per_ton": round(total_emissions / req.export_tonnage, 2)
+        },
+        "financial_liability": {
+            "eu_ets_carbon_price_eur": eu_ets_price_eur,
+            "total_cbam_liability_eur": round(cbam_tax_eur, 2),
+            "total_cbam_liability_inr": round(cbam_tax_inr, 2),
+            "cost_penalty_per_tonne_eur": round(cost_per_ton_eur, 2),
+            "cost_penalty_percentage": round((cost_per_ton_eur / 850.0) * 100, 1) # assuming avg $850/t base price
+        },
+        "decarbonization_pathway": {
+            "recommended_process": green_route_name,
+            "emissions_reduction_tCO2e": round(total_emissions - green_total_emissions, 2),
+            "annualized_tax_savings_eur": round(potential_savings_eur, 2),
+            "annualized_tax_savings_inr": round(potential_savings_eur * eur_to_inr, 2)
+        }
+    }
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Feature 3: DGFT & Customs Regulatory Change Radar
+# ─────────────────────────────────────────────────────────────────────────────
+@app.get("/api/regulatory-radar")
+@app.get("/api/v1/regulatory-radar")
+async def regulatory_radar_endpoint(chapter: Optional[str] = None):
+    radar_feed = [
+        {
+            "id": "DGFT-PN-2026-49",
+            "authority": "DGFT",
+            "type": "Public Notice",
+            "date": "2026-10-28",
+            "title": "Revision of RoDTEP Scheme Schedule & Duty Remission Rates",
+            "chapter": "Chapter 72 & 73 (Iron, Steel, Articles thereof)",
+            "impact_level": "High",
+            "nature": "Benefit Increase",
+            "summary": "RoDTEP rates for finished steel and value-added alloy fabrications increased by 0.7% to cushion global tariff shocks. Exporters can claim duty credit scrips on shipping bills filed on or after Nov 1, 2026.",
+            "action_required": "Ensure Shipping Bill declaration includes RoDTEP claim code 'Y' in EDI column."
+        },
+        {
+            "id": "CBIC-CIR-2026-18",
+            "authority": "CBIC Customs",
+            "type": "Circular",
+            "date": "2026-10-24",
+            "title": "Mandatory EORI & Authorized Economic Operator (AEO) Reciprocity with EU & UK",
+            "chapter": "All Chapters",
+            "impact_level": "Critical",
+            "nature": "Compliance Requirement",
+            "summary": "Customs automated gateway now validates mutual recognition of Indian AEO-T2 certificates with EU AEO status for green-channel customs clearance at Rotterdam, Hamburg, and London Gateway.",
+            "action_required": "Update export profile with Indian AEO Tier-2 registration number to fast-track destination inspection."
+        },
+        {
+            "id": "DGFT-NOTIF-2026-38",
+            "authority": "DGFT",
+            "type": "Notification",
+            "date": "2026-10-15",
+            "title": "Elimination of Minimum Export Price (MEP) on Premium Basmati & Parboiled Rice",
+            "chapter": "Chapter 10 (Cereals - Rice)",
+            "impact_level": "High",
+            "nature": "Deregulation / Liberalization",
+            "summary": "The Minimum Export Price floor of $950/MT on Basmati Rice has been removed. Exports are permitted freely subject to APEDA online contract registration.",
+            "action_required": "Obtain APEDA Registration-cum-Allocation Certificate (RCAC) prior to customs EDI gate-in."
+        },
+        {
+            "id": "EU-REG-2026-891",
+            "authority": "European Commission / DG Trade",
+            "type": "Trade Barrier",
+            "date": "2026-10-09",
+            "title": "EUDR Due Diligence Statement Compliance for Leather, Rubber & Wood",
+            "chapter": "Chapter 41, 40, 44 (Leather, Rubber, Timber)",
+            "impact_level": "Critical",
+            "nature": "Non-Tariff Barrier",
+            "summary": "All shipments entering EU must provide plot-level geolocation coordinates proving deforestation-free origin since Dec 31, 2020.",
+            "action_required": "Attach farm-level GIS geolocation GeoJSON data in the ExportEase Compliance Dossier."
+        },
+        {
+            "id": "DGFT-TN-2026-22",
+            "authority": "DGFT",
+            "type": "Trade Notice",
+            "date": "2026-09-30",
+            "title": "Extension of Rebate of State and Central Taxes and Levies (RoSCTL) for Made-ups",
+            "chapter": "Chapter 61, 62, 63 (Apparel & Textile Made-ups)",
+            "impact_level": "Medium",
+            "nature": "Scheme Extension",
+            "summary": "RoSCTL rebate scheme extended through March 31, 2028 without rate reduction for Indian apparel exporters.",
+            "action_required": "File RoSCTL electronic scrip redemption on ICEGATE portal within 180 days of LEO."
+        }
+    ]
+    
+    if chapter:
+        filtered = [item for item in radar_feed if chapter.lower() in item["chapter"].lower()]
+        return {"status": "success", "count": len(filtered), "feed": filtered}
+        
+    return {"status": "success", "count": len(radar_feed), "feed": radar_feed}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Feature 4: MSME Trade Finance & TReDS Invoice Factoring Estimator
+# ─────────────────────────────────────────────────────────────────────────────
+class TradeFinanceRequest(BaseModel):
+    invoice_amount: float = 85000.0
+    currency: str = "USD"
+    payment_terms_days: int = 90
+    buyer_country: str = "United States"
+    buyer_credit_rating: str = "A"
+
+@app.post("/api/trade-finance")
+@app.post("/api/v1/trade-finance")
+async def trade_finance_endpoint(req: TradeFinanceRequest):
+    fx_rates = {"USD": 86.50, "EUR": 93.80, "GBP": 111.40, "AED": 23.55}
+    fx_rate = fx_rates.get(req.currency, 86.50)
+    invoice_inr = req.invoice_amount * fx_rate
+    
+    # Disbursal percentage based on buyer rating
+    rating_disbursal = {"AAA": 0.90, "AA": 0.88, "A": 0.85, "BBB": 0.80, "BB": 0.70}
+    disbursal_pct = rating_disbursal.get(req.buyer_credit_rating, 0.85)
+    
+    # Annual factoring interest rate on TReDS (RXIL, M1xchange)
+    interest_rate_p_a = 0.075 # 7.5% per annum
+    tenure_years = req.payment_terms_days / 365.0
+    
+    upfront_cash_usd = req.invoice_amount * disbursal_pct
+    upfront_cash_inr = upfront_cash_usd * fx_rate
+    
+    factoring_discount_usd = upfront_cash_usd * interest_rate_p_a * tenure_years
+    factoring_discount_inr = factoring_discount_usd * fx_rate
+    
+    # ECGC (Export Credit Guarantee Corporation) Buyer Insurance Premium
+    ecgc_rate = 0.0048 # 0.48% for standard Comprehensive Export Credit Policy
+    ecgc_premium_usd = req.invoice_amount * ecgc_rate
+    ecgc_premium_inr = ecgc_premium_usd * fx_rate
+    
+    # Net Liquidity Disbursed to MSME Exporter on Day 1
+    net_day1_usd = upfront_cash_usd - factoring_discount_usd - ecgc_premium_usd
+    net_day1_inr = net_day1_usd * fx_rate
+    
+    # Remaining Escrow Retention (paid when foreign buyer settles)
+    retention_balance_usd = req.invoice_amount - upfront_cash_usd
+    retention_balance_inr = retention_balance_usd * fx_rate
+    
+    return {
+        "status": "success",
+        "parameters": req.dict(),
+        "fx_applied": {"currency": req.currency, "rate_to_inr": fx_rate},
+        "gross_invoice": {
+            "amount_foreign": req.invoice_amount,
+            "amount_inr": round(invoice_inr, 2)
+        },
+        "treds_factoring_summary": {
+            "disbursal_percentage": round(disbursal_pct * 100, 1),
+            "upfront_advance_usd": round(upfront_cash_usd, 2),
+            "upfront_advance_inr": round(upfront_cash_inr, 2),
+            "interest_rate_annual_pct": 7.5,
+            "factoring_cost_usd": round(factoring_discount_usd, 2),
+            "factoring_cost_inr": round(factoring_discount_inr, 2),
+            "ecgc_insurance_premium_usd": round(ecgc_premium_usd, 2),
+            "ecgc_insurance_premium_inr": round(ecgc_premium_inr, 2),
+            "net_day1_liquidity_usd": round(net_day1_usd, 2),
+            "net_day1_liquidity_inr": round(net_day1_inr, 2),
+            "retention_reserve_due_at_maturity_usd": round(retention_balance_usd, 2),
+            "retention_reserve_due_at_maturity_inr": round(retention_balance_inr, 2)
+        },
+        "hedging_guidance": {
+            "recommended_strategy": "3-Month Forward Lock Contract",
+            "forward_rate_inr": round(fx_rate + 0.42, 2),
+            "risk_hedged": "Protects against INR appreciation during the 90-day credit window."
+        }
+    }
+
+candidate_paths = [
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "frontend", "dist")),
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "ExportEase UI (2)", "ExportEase UI", "ExportEase UI", "dist"))
+]
+frontend_path = next((p for p in candidate_paths if os.path.exists(p)), candidate_paths[0])
+
+if os.path.exists(frontend_path):
+    app.mount("/assets", StaticFiles(directory=os.path.join(frontend_path, "assets")), name="assets")
+    
+    @app.get("/{catchall:path}")
+    async def serve_react_app(catchall: str):
+        # Serve index.html for all non-API paths (handles React Router)
+        if catchall != "" and os.path.exists(os.path.join(frontend_path, catchall)):
+            return FileResponse(os.path.join(frontend_path, catchall))
+        return FileResponse(os.path.join(frontend_path, "index.html"))
+else:
+    @app.get("/")
+    def health_check():
+        return {"status": "ExportEase AI API is running, but Frontend is not built yet!"}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
