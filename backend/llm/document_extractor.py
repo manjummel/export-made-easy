@@ -180,10 +180,28 @@ def parse_export_fields(raw_text: str, filename: str, doc_type_hint: Optional[st
                 product_description = val
                 break
 
+    # 7. Quantity & Unit
+    qty_patterns = [
+        r"(?:quantity|qty|total\s*quantity)[:\s\-]+([\d,]+(?:\.\d+)?)\s*([a-zA-Z]+)?",
+        r"\b([\d,]+(?:\.\d+)?)\s*(pcs|pieces|kg|kgs|mt|metric\s*tonnes|units|boxes|cartons|bags|bales)\b",
+    ]
+    quantity = None
+    unit = "PCS"
+    for p in qty_patterns:
+        m = re.search(p, t, re.IGNORECASE)
+        if m:
+            try:
+                quantity = float(m.group(1).replace(",", ""))
+                if m.group(2):
+                    unit = m.group(2).strip().upper()
+                break
+            except Exception:
+                pass
+
     return {
         "filename": filename,
         "fields": {
-            "product_description": product_description,
-            "hs_code": hs_code
+            "quantity": quantity,
+            "unit": unit
         }
     }
