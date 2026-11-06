@@ -14,6 +14,13 @@ try:
 except ImportError:
     PYPDF_AVAILABLE = False
 
+try:
+    from PIL import Image
+    import pytesseract
+    OCR_AVAILABLE = True
+except ImportError:
+    OCR_AVAILABLE = False
+
 DOC_TYPES = [
     "commercial_invoice",
     "packing_list",
@@ -48,4 +55,13 @@ def extract_raw_text(file_bytes: bytes, filename: str) -> str:
                 text = file_bytes.decode("utf-8", errors="ignore")
             except Exception:
                 text = ""
+    elif ext in [".png", ".jpg", ".jpeg"]:
+        if OCR_AVAILABLE:
+            try:
+                image = Image.open(io.BytesIO(file_bytes))
+                text = pytesseract.image_to_string(image)
+            except Exception as e:
+                text = f"[OCR Processing Note: OCR engine not configured on system: {e}]"
+        else:
+            text = f"[OCR Note: PIL/pytesseract library not available]"
     return text.strip()
