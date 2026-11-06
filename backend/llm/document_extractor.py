@@ -140,10 +140,37 @@ def parse_export_fields(raw_text: str, filename: str, doc_type_hint: Optional[st
             hs_code = m.group(1).strip()
             break
 
+    # 4. Exporter / Shipper Name
+    exp_patterns = [
+        r"(?:exporter|shipper|seller|consignor|from)[:\s\-]+([^\n\r,]+(?:ltd|pvt|inc|corp|co\.|llc|exports)?)",
+        r"(?:m/s\.?|messrs\.?)\s+([A-Za-z0-9\s\.\&]+(?:ltd|pvt|private|limited|llc|exports)?)",
+    ]
+    exporter_name = None
+    for p in exp_patterns:
+        m = re.search(p, t, re.IGNORECASE)
+        if m:
+            val = m.group(1).strip()
+            if len(val) > 3 and not val.lower().startswith("name"):
+                exporter_name = val
+                break
+
+    # 5. Importer / Consignee Name
+    imp_patterns = [
+        r"(?:importer|consignee|buyer|bill\s*to|to)[:\s\-]+([^\n\r,]+(?:ltd|pvt|inc|corp|co\.|llc|se|gmbh)?)",
+    ]
+    importer_name = None
+    for p in imp_patterns:
+        m = re.search(p, t, re.IGNORECASE)
+        if m:
+            val = m.group(1).strip()
+            if len(val) > 3 and not val.lower().startswith("name"):
+                importer_name = val
+                break
+
     return {
         "filename": filename,
         "fields": {
-            "invoice_number": invoice_number,
-            "invoice_date": invoice_date
+            "exporter_name": exporter_name,
+            "importer_name": importer_name
         }
     }
