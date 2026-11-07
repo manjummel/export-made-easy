@@ -53,6 +53,27 @@
 - **Risk Guardian Agent**: Evaluates geopolitical, transit piracy, and foreign exchange risks.
 - **Policy Monitor Agent**: Tracks amendments in foreign trade policies and bilateral trade agreements.
 
+### 4. 🔍 AI-Powered Export Document Cross-Verification (Production Module)
+- **Multi-Document Ingestion (PDF, PNG, JPG, JPEG)**: Exporters can drag-and-drop multiple shipping documents in one session across all 5 standard export documents:
+  1. *Commercial Invoice (CI)*
+  2. *Packing List (PL)*
+  3. *Purchase Order (PO)*
+  4. *Bill of Lading / Airway Bill (B/L)*
+  5. *Certificate of Origin (COO / REX / Form A)*
+- **Hybrid OCR & Structured Entity Extraction**: Native digital text parsing (via `pypdf`) with automated OCR fallback (via `pytesseract` & `Pillow`) to extract 10+ critical customs parameters:
+  - Exporter & Importer/Consignee Name and legal address
+  - Invoice / Document Reference Number & Date
+  - Product Description & ITC-HS Code (4-to-8 digit classification)
+  - Consignment Quantity & Unit of Measurement (UOM)
+  - Gross Weight & Net Weight (kg) with ICEGATE 1.0% statutory tolerance checks
+  - Declared Consignment Value, Currency, and Port Pairs (POL & POD)
+- **Multi-Way Discrepancy Matrix**: Dynamically cross-compares all uploaded documents to detect:
+  - HS Code mismatches between Commercial Invoice, Bill of Lading, and COO.
+  - Weight discrepancies exceeding the mandatory 1% Indian customs threshold.
+  - Quantity mismatch between PO, Invoice, and Packing List.
+  - Consignee naming and EORI / VAT variance.
+- **ICEGATE Readiness Gauge & Auto-Resolve**: Generates a 0–100% customs clearance probability score and provides one-click auto-resolution to synchronize manifests before electronic EDI submission.
+
 ---
 
 ## 🛠️ Tech Stack & Architecture
@@ -139,7 +160,12 @@ npm run dev
 
 - `POST /chat` — Query the ExportEase AI Copilot with trade context
 - `POST /chat/stream` — SSE streaming response for real-time AI generation
-- `GET /` — API health check and service status
+- `POST /api/v1/documents/extract` — Multi-document upload & OCR entity extraction (PDF, PNG, JPG, JPEG)
+- `POST /api/v1/documents/cross-verify` — Cross-verification of parsed shipping documents against customs rules
+- `POST /api/v1/documents/upload-and-verify` — Complete one-shot multi-document upload, extraction, and verification
+- `POST /api/v1/audit-documents` — Single consignment tolerance audit against ICEGATE & DGFT rules
+- `POST /api/v1/cbam-estimate` — EU Carbon Border Adjustment Mechanism (CBAM) tax liability estimation
+- `GET /health` — API health check and service status
 
 ---
 
