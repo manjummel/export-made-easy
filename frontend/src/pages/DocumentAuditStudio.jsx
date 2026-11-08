@@ -13,6 +13,7 @@ import PageHeader from '../components/shared/PageHeader';
 import enterpriseFeaturesService from '../services/enterpriseFeaturesService';
 import DocumentUploadZone from '../components/documents/DocumentUploadZone';
 import ExtractedDocumentsReview from '../components/documents/ExtractedDocumentsReview';
+import { downloadAuditReport } from '../utils/auditReportGenerator';
 
 const PRESETS = {
   textiles: {
@@ -383,6 +384,15 @@ export default function DocumentAuditStudio() {
   const score = auditResult?.icegate_readiness_score || 0;
   const isReady = auditResult?.compliance_verdict === 'READY_FOR_ICEGATE';
 
+  const handleDownloadReport = () => {
+    if (!auditResult) {
+      toast.warning('No Audit Data', 'Execute or load a document verification scenario first.');
+      return;
+    }
+    downloadAuditReport(auditResult, 'ICEGATE_Customs_Audit_Report');
+    toast.success('Dossier Downloaded', 'Exported standardized ICEGATE compliance report.');
+  };
+
   return (
     <div className="space-y-6 pb-20">
       <PageHeader
@@ -393,6 +403,14 @@ export default function DocumentAuditStudio() {
         badge={<Badge variant="primary" size="sm" dot pulse>ICEGATE 2.0 & DGFT EDI</Badge>}
         actions={
           <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              icon={Download}
+              onClick={handleDownloadReport}
+            >
+              Export Dossier Report
+            </Button>
             <Button
               variant="outline"
               size="sm"
