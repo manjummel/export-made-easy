@@ -240,6 +240,10 @@ def parse_export_fields(raw_text: str, filename: str, doc_type_hint: Optional[st
     pod_match = re.search(r"(?:port\s*of\s*discharge|discharge\s*port|pod|destination\s*port)[:\s\-]+([^\n\r,]+)", t, re.IGNORECASE)
     port_of_discharge = pod_match.group(1).strip() if pod_match else None
 
+    # 11. Incoterms (ICC 2020: FOB, CIF, CFR, EXW, FCA, CPT, CIP, DAP, DPU, DDP)
+    incoterm_match = re.search(r"\b(FOB|CIF|CFR|EXW|FCA|CPT|CIP|DAP|DPU|DDP)\b", t, re.IGNORECASE)
+    incoterm = incoterm_match.group(1).upper() if incoterm_match else None
+
     # Determine / infer doc_type
     doc_type = doc_type_hint or infer_doc_type(raw_text, filename)
 
@@ -267,6 +271,7 @@ def parse_export_fields(raw_text: str, filename: str, doc_type_hint: Optional[st
             "net_weight": net_weight,
             "total_amount": total_amount,
             "currency": currency,
+            "incoterm": incoterm,
             "port_of_loading": port_of_loading,
             "port_of_discharge": port_of_discharge,
         }
@@ -468,6 +473,37 @@ def cross_verify_documents(extracted_documents: List[Dict[str, Any]]) -> Dict[st
                     "value_b": doc_inv,
                     "detail": f"{dlabel} references '{doc_inv}' instead of active Commercial Invoice '{ci_inv}'. Supporting shipping documents must quote identical invoice numbering.",
                     "auto_fix": f"Update {dlabel} header reference to '{ci_inv}'."
+                })
+
+        # 6. Incoterms Parity Check (CI vs PO vs B/L)
+        ci_inco = ci_fields.get("incoterm")
+        doc_inco = fields.get("incoterm")
+        if ci_inco and doc_inco and dtype in ["purchase_order", "bill_of_lading"]:
+            if ci_inco != doc_inco:
+                discrepancies.append({
+                    "id": f"DISC-INCO-{dtype}",
+                    "category": "Incoterms Discrepancy",
+                    "severity": "critical",
+                    "field": "Incoterms Delivery Term",
+                    "document_a": ci_label,
+                    "value_a": ci_inco,
+                    "document_b": dlabel,
+                    "value_b": doc_inco,
+                    "detail": f"{ci_label} specifies '{ci_inco}' terms whereas {dlabel} states '{doc_inco}'. Carrier freight and insurance liability allocation is in conflict under ICC Incoterms rules.",
+                    "auto_fix": f"Reconcile {dlabel} to '{ci_inco}' delivery terms."
+                })
+            else:
+                discrepancies.append({
+                    "id": f"PASS-INCO-{dtype}",
+                    "category": "Incoterms Parity",
+                    "severity": "passed",
+                    "field": "Incoterms Rule",
+                    "document_a": ci_label,
+                    "value_a": ci_inco,
+                    "document_b": dlabel,
+                    "value_b": doc_inco,
+                    "detail": f"Incoterms '{ci_inco}' match consistently across {ci_label} and {dlabel}.",
+                    "auto_fix": None
                 })
 
     # If no other documents were uploaded, add informative guidance
