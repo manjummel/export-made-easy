@@ -43,6 +43,24 @@ DOC_TYPE_LABELS = {
 }
 
 
+def _parse_to_datetime(date_str: Optional[str]) -> Optional[datetime]:
+    """Parse common international and Indian export date formats into a datetime object."""
+    if not date_str:
+        return None
+    cleaned = date_str.strip().replace(",", " ").replace(".", "-").replace("/", "-")
+    formats = [
+        "%Y-%m-%d", "%d-%m-%Y", "%m-%d-%Y",
+        "%d-%m-%y", "%m-%d-%y",
+        "%d %b %Y", "%d %B %Y", "%b %d %Y", "%B %d %Y"
+    ]
+    for fmt in formats:
+        try:
+            return datetime.strptime(cleaned, fmt)
+        except Exception:
+            pass
+    return None
+
+
 def extract_raw_text(file_bytes: bytes, filename: str) -> str:
     """Extract raw text from PDF or Image file bytes."""
     ext = os.path.splitext(filename.lower())[1]
@@ -505,6 +523,41 @@ def cross_verify_documents(extracted_documents: List[Dict[str, Any]]) -> Dict[st
                     "detail": f"Incoterms '{ci_inco}' match consistently across {ci_label} and {dlabel}.",
                     "auto_fix": None
                 })
+
+    # 7. Chronological Date Sequence Audit (PO <= CI <= B/L <= COO)
+    po = docs_by_type.get("purchase_order")
+    bl = docs_by_type.get("bill_of_lading")
+    ci_dt = _parse_to_datetime(ci_fields.get("invoice_date"))
+    po_dt = _parse_to_datetime(po.get("fields", {}).get("invoice_date")) if po else None
+    bl_dt = _parse_to_datetime(bl.get("fields", {}).get("invoice_date")) if bl else None
+
+    if po_dt and ci_dt and po_dt > ci_dt:
+        discrepancies.append({
+            "id": "DISC-DATE-PO-CI",
+            "category": "Chronological Inversion",
+            "severity": "critical",
+            "field": "Filing Sequence Date",
+            "document_a": "Commercial Invoice",
+            "value_a": ci_fields.get("invoice_date"),
+            "document_b": "Purchase Order",
+            "value_b": po.get("fields", {}).get("invoice_date"),
+            "detail": f"Commercial Invoice date ({ci_fields.get('invoice_date')}) predates Purchase Order issuance ({po.get('fields', {}).get('invoice_date')}). Customs audits and bank LC negotiations reject post-facto billing.",
+            "auto_fix": "Align Commercial Invoice date to on or after Purchase Order issuance."
+        })
+
+    if ci_dt and bl_dt and bl_dt < ci_dt:
+        discrepancies.append({
+            "id": "DISC-DATE-CI-BL",
+            "category": "Chronological Inversion",
+            "severity": "critical",
+            "field": "Bill of Lading Date",
+            "document_a": "Commercial Invoice",
+            "value_a": ci_fields.get("invoice_date"),
+            "document_b": "Bill of Lading",
+            "value_b": bl.get("fields", {}).get("invoice_date"),
+            "detail": f"Bill of Lading on-board date ({bl.get('fields', {}).get('invoice_date')}) precedes Commercial Invoice ({ci_fields.get('invoice_date')}). Cargo must be invoiced prior to vessel loading.",
+            "auto_fix": "Rectify Bill of Lading shipped-on-board date to be subsequent to Commercial Invoice."
+        })
 
     # If no other documents were uploaded, add informative guidance
     if len(extracted_documents) < 2:
