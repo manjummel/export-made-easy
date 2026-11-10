@@ -1,4 +1,4 @@
-# 🚢 ExportEase AI — Autonomous Global Export Operating System
+# 🚢 ExportEase AI — Autonomous Global Export Intelligence & Compliance Platform
 
 <div align="center">
 
@@ -9,7 +9,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-**An autonomous, multi-agent AI export operating system engineered to empower cross-border exporters and MSMEs with end-to-end statutory validation, real-time tariff optimization, verified buyer discovery, and interactive 3D global logistics intelligence.**
+**An autonomous, multi-agent AI export intelligence and customs compliance platform engineered to empower cross-border exporters and MSMEs with end-to-end statutory validation, real-time tariff optimization, verified buyer discovery, and interactive 3D global logistics intelligence.**
 
 [Explore Live Demo](#-quick-start) • [Features](#-core-features) • [Architecture](#-tech-stack--architecture) • [API Reference](#-api-endpoints)
 
@@ -118,8 +118,8 @@ START_ALL.bat
 
 #### **1. Clone the Repository**
 ```bash
-git clone https://github.com/pbaveena7/Exportease-AI.git
-cd Exportease-AI
+git clone https://github.com/manjummel/export-made-easy.git
+cd export-made-easy
 ```
 
 #### **2. Start the Backend API**
@@ -172,7 +172,7 @@ npm run dev
 ## 📂 Project Directory Structure
 
 ```
-Exportease-AI/
+export-made-easy/
 ├── START_ALL.bat                      # One-click dual server launcher
 ├── START_BACKEND.bat                  # Backend launcher
 ├── START_FRONTEND.bat                 # Frontend launcher
